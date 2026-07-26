@@ -89,9 +89,18 @@ document.querySelectorAll(".swatch").forEach((sw) => {
     "</svg>";
 });
 
-/* Seul le fil argenté est disponible (le 2 de chaque mois).
-   Le fil doré est visible en aperçu mais pas encore achetable. */
-const AVAILABLE_THREADS = ["argente"];
+/* Dispo :
+   - fil doré   -> disponible en permanence (achat direct)
+   - fil argenté-> édition limitée, le 2 de chaque mois (formulaire "prévenez-moi")
+
+   Précharge toutes les photos de variantes -> bascule instantanée, pas de saut. */
+window.addEventListener("load", () => setTimeout(() => {
+  Object.keys(IMAGES).forEach((pk) =>
+    Object.keys(IMAGES[pk]).forEach((v) =>
+      IMAGES[pk][v].forEach((src) => { const im = new Image(); im.src = src; })
+    )
+  );
+}, 250));
 
 /* ---- État ------------------------------------------------- */
 let cartCount = 0;
@@ -165,19 +174,14 @@ document.querySelectorAll(".product").forEach((card) => {
   card.querySelector(".carousel-arrow.next")
     .addEventListener("click", () => goTo(state[key].view + 1));
 
-  function isAvailable() {
-    return AVAILABLE_THREADS.indexOf(state[key].thread) !== -1;
-  }
-
-  function setPrice() {
-    if (isAvailable()) {
-      const price = PRODUCTS[key].prices[state[key].thread];
+  // fil argenté -> mode "prévenez-moi" ; fil doré -> achat direct
+  function updateCTA() {
+    const silver = state[key].thread === "argente";
+    card.classList.toggle("notify-mode", silver);
+    if (!silver) {
+      const price = PRODUCTS[key].prices.dore;
       btn.dataset.price = price;
-      btn.classList.remove("is-unavailable");
       btn.textContent = `Ajouter au panier — ${price}€`;
-    } else {
-      btn.classList.add("is-unavailable");
-      btn.textContent = "Fil doré — bientôt disponible";
     }
   }
 
@@ -191,7 +195,7 @@ document.querySelectorAll(".product").forEach((card) => {
         card.querySelectorAll(".swatch-btn").forEach((s) =>
           s.classList.toggle("is-selected", s === sw)
         );
-        setPrice();
+        updateCTA();
         paintSlides();
       });
     });
@@ -203,7 +207,7 @@ document.querySelectorAll(".product").forEach((card) => {
         card.querySelectorAll(".thread").forEach((t) =>
           t.classList.toggle("is-selected", t === tBtn)
         );
-        setPrice();
+        updateCTA();
         paintSlides();
       });
     });
@@ -219,12 +223,18 @@ document.querySelectorAll(".product").forEach((card) => {
     });
   });
 
-  /* ajouter au panier */
+  /* fil argenté : formulaire "prévenez-moi la veille du 2" */
+  const notifyForm = card.querySelector(".notify-form");
+  if (notifyForm) {
+    notifyForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      e.target.reset();
+      toast("Merci ! Vous serez prévenu·e la veille du prochain 2.");
+    });
+  }
+
+  /* ajouter au panier (fil doré) */
   btn.addEventListener("click", () => {
-    if (!isAvailable()) {
-      toast("Le fil doré arrive bientôt — seul le fil argenté est proposé, le 2 de chaque mois.");
-      return;
-    }
     if (!state[key].size) {
       toast("Merci de choisir une taille.");
       card.querySelector(".sizes").animate(
@@ -241,7 +251,7 @@ document.querySelectorAll(".product").forEach((card) => {
     toast(`${p.name}${couleur} · ${fil} · taille ${state[key].size} — ${p.prices[state[key].thread]}€`);
   });
 
-  setPrice();
+  updateCTA();
   paintSlides();
 });
 
@@ -262,10 +272,12 @@ document.getElementById("newsletterForm").addEventListener("submit", (e) => {
   toast("Merci ! Vous êtes inscrit·e à la newsletter.");
 });
 
-/* ---- Header au scroll ------------------------------------- */
+/* ---- Header : apparaît uniquement au scroll --------------- */
 const header = document.getElementById("siteHeader");
-addEventListener("scroll", () => {
-  header.style.boxShadow = window.scrollY > 40
-    ? "0 6px 24px rgba(0,0,0,0.04)"
-    : "none";
-});
+function onScroll() {
+  const scrolled = window.scrollY > 120;
+  header.classList.toggle("is-visible", scrolled);
+  header.style.boxShadow = scrolled ? "0 6px 24px rgba(0,0,0,0.05)" : "none";
+}
+addEventListener("scroll", onScroll, { passive: true });
+onScroll();
