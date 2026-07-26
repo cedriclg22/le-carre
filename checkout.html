@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Le Carré — Paiement</title>
+  <meta name="description" content="Finalisez votre commande Le Carré." />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="checkout-header">
+    <a href="index.html" class="co-back" aria-label="Retour à la boutique">←</a>
+    <a href="index.html" class="header-wordmark co-logo">Le Carré</a>
+    <span class="co-secure">Paiement sécurisé</span>
+  </header>
+
+  <main class="checkout">
+
+    <!-- Colonne gauche : coordonnées + livraison + paiement -->
+    <section class="checkout-form">
+      <form id="checkoutForm" novalidate>
+
+        <h2 class="co-step">Coordonnées</h2>
+        <div class="co-field">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="vous@exemple.com" required />
+        </div>
+
+        <h2 class="co-step">Livraison</h2>
+        <div class="co-row">
+          <div class="co-field">
+            <label for="firstname">Prénom</label>
+            <input type="text" id="firstname" name="firstname" autocomplete="given-name" required />
+          </div>
+          <div class="co-field">
+            <label for="lastname">Nom</label>
+            <input type="text" id="lastname" name="lastname" autocomplete="family-name" required />
+          </div>
+        </div>
+        <div class="co-field">
+          <label for="address">Adresse</label>
+          <input type="text" id="address" name="address" autocomplete="street-address" required />
+        </div>
+        <div class="co-row">
+          <div class="co-field co-field-sm">
+            <label for="zip">Code postal</label>
+            <input type="text" id="zip" name="zip" autocomplete="postal-code" required />
+          </div>
+          <div class="co-field">
+            <label for="city">Ville</label>
+            <input type="text" id="city" name="city" autocomplete="address-level2" required />
+          </div>
+        </div>
+        <div class="co-field">
+          <label for="country">Pays</label>
+          <select id="country" name="country">
+            <option value="FR">France métropolitaine</option>
+            <option value="BE">Belgique</option>
+            <option value="CH">Suisse</option>
+            <option value="LU">Luxembourg</option>
+          </select>
+        </div>
+
+        <h2 class="co-step">Paiement</h2>
+        <!-- ZONE DE PAIEMENT — à connecter à Stripe.
+             Stripe fournit ses propres champs sécurisés (Stripe Elements) :
+             aucune donnée de carte ne doit être saisie/collectée ici en dur.
+             Point d'intégration : voir checkout.js (initStripe / montage des Elements). -->
+        <div class="co-payment" id="paymentZone">
+          <div class="co-payment-lock">🔒 Paiement par carte — sécurisé par Stripe</div>
+          <div class="co-payment-placeholder" id="stripeMount">
+            Zone de paiement Stripe (à connecter)
+          </div>
+        </div>
+
+        <button type="submit" class="co-pay-btn" id="payBtn">Payer <span id="payTotal">0€</span></button>
+        <p class="co-legal">En passant commande, vous acceptez nos conditions générales de vente.</p>
+      </form>
+    </section>
+
+    <!-- Colonne droite : récapitulatif -->
+    <aside class="checkout-summary">
+      <h2 class="co-summary-title">Votre commande</h2>
+      <div id="summaryItems" class="co-items"></div>
+      <div class="co-totals">
+        <div class="co-total-line"><span>Sous-total</span><span id="sumSubtotal">0€</span></div>
+        <div class="co-total-line"><span>Livraison</span><span class="co-free">Offerte</span></div>
+        <div class="co-total-line co-total-grand"><span>Total</span><span id="sumTotal">0€</span></div>
+      </div>
+      <a href="index.html" class="co-continue">← Continuer mes achats</a>
+    </aside>
+
+  </main>
+
+  <div class="cart-toast" id="cartToast" role="status" aria-live="polite"></div>
+
+  <script src="cart.js"></script>
+  <script src="checkout.js"></script>
+</body>
+</html>

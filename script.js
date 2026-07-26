@@ -103,7 +103,6 @@ window.addEventListener("load", () => setTimeout(() => {
 }, 250));
 
 /* ---- État ------------------------------------------------- */
-let cartCount = 0;
 const state = {};
 
 /* ---- Init des produits ------------------------------------ */
@@ -275,12 +274,22 @@ document.querySelectorAll(".product").forEach((card) => {
       );
       return;
     }
-    cartCount++;
-    document.getElementById("cartCount").textContent = cartCount;
     const p = PRODUCTS[key];
+    const variant = state[key].thread + "-" + state[key].color;
+    const price = p.prices[state[key].thread];
     const fil = state[key].thread === "dore" ? "fil doré" : "fil argenté";
-    const couleur = hasImages ? " · " + state[key].color : "";
-    toast(`${p.name}${couleur} · ${fil} · taille ${state[key].size} — ${p.prices[state[key].thread]}€`);
+    window.Cart.add({
+      id: key + "-" + variant + "-" + state[key].size,
+      product: key,
+      productName: p.name,
+      thread: fil,
+      color: state[key].color,
+      size: state[key].size,
+      price: price,
+      img: (IMAGES[key] && IMAGES[key][variant]) ? IMAGES[key][variant][0] : "",
+    });
+    window.Cart.open();
+    toast(`${p.name} ajouté au panier`);
   });
 
   updateCTA();
