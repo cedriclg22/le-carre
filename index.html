@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Le Carré — Vêtements simples, nobles et discrets. Fabrication 100% française.</title>
+  <meta name="description" content="Le Carré — une marque jeune, ambitieuse, noble et luxueuse. Vêtements 100% coton, fabrication française, fil de couture rare doré ou argenté." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="siteHeader">
+    <button class="header-menu" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+    <a href="#top" class="header-wordmark">Le Carré</a>
+    <button class="header-cart" aria-label="Panier">
+      Panier <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="hero-image" role="img" aria-label="Le Carré — intérieur épuré et lumineux, tout en blanc"></div>
+    </section>
+
+    <!-- ============ COLLECTION ============ -->
+    <section class="section collection" id="collection">
+      <h2 class="giant-title">La collection 1</h2>
+
+      <div class="products">
+
+        <!-- LE TSHIRT -->
+        <article class="product" data-product="tshirt">
+          <h3 class="product-name">Le Tshirt</h3>
+
+          <div class="carousel">
+            <button class="carousel-arrow prev" aria-label="Image précédente">&lt;</button>
+            <div class="carousel-viewport">
+              <div class="carousel-track"></div>
+            </div>
+            <button class="carousel-arrow next" aria-label="Image suivante">&gt;</button>
+            <div class="carousel-dots"></div>
+          </div>
+
+          <p class="product-note">Uniquement disponible le 2 de chaque mois en quantité limitée.</p>
+
+          <div class="variants">
+            <div class="variant-group">
+              <span class="thread-label">fil doré</span>
+              <button class="swatch-btn" data-thread="dore" data-color="blanc" aria-label="T-shirt blanc, fil doré">
+                <span class="swatch swatch-white gold"></span>
+              </button>
+              <button class="swatch-btn" data-thread="dore" data-color="noir" aria-label="T-shirt noir, fil doré">
+                <span class="swatch swatch-black gold"></span>
+              </button>
+            </div>
+            <div class="variant-group">
+              <button class="swatch-btn is-selected" data-thread="argente" data-color="blanc" aria-label="T-shirt blanc, fil argenté">
+                <span class="swatch swatch-white silver"></span>
+              </button>
+              <button class="swatch-btn" data-thread="argente" data-color="noir" aria-label="T-shirt noir, fil argenté">
+                <span class="swatch swatch-black silver"></span>
+              </button>
+              <span class="thread-label">fil argenté</span>
+            </div>
+          </div>
+
+          <div class="sizes">
+            <span class="sizes-label">Taille</span>
+            <div class="size-options">
+              <button class="size">XS</button>
+              <button class="size">S</button>
+              <button class="size">M</button>
+              <button class="size">L</button>
+              <button class="size">XL</button>
+              <button class="size">XXL</button>
+              <button class="size">XXXL</button>
+            </div>
+          </div>
+
+          <button class="add-to-cart" data-price="89">Ajouter au panier — 89€</button>
+        </article>
+
+        <!-- LE PANTALON -->
+        <article class="product" data-product="pantalon">
+          <h3 class="product-name">Le Pantalon</h3>
+
+          <div class="carousel">
+            <button class="carousel-arrow prev" aria-label="Image précédente">&lt;</button>
+            <div class="carousel-viewport">
+              <div class="carousel-track"></div>
+            </div>
+            <button class="carousel-arrow next" aria-label="Image suivante">&gt;</button>
+            <div class="carousel-dots"></div>
+          </div>
+
+          <div class="variants">
+            <div class="variant-group">
+              <span class="thread-label">fil doré</span>
+              <button class="swatch-btn" data-thread="dore" data-color="clair" aria-label="Pantalon clair, fil doré">
+                <span class="swatch swatch-lightnavy gold"></span>
+              </button>
+              <button class="swatch-btn" data-thread="dore" data-color="noir" aria-label="Pantalon foncé, fil doré">
+                <span class="swatch swatch-navy gold"></span>
+              </button>
+            </div>
+            <div class="variant-group">
+              <button class="swatch-btn is-selected" data-thread="argente" data-color="clair" aria-label="Pantalon clair, fil argenté">
+                <span class="swatch swatch-lightnavy silver"></span>
+              </button>
+              <button class="swatch-btn" data-thread="argente" data-color="noir" aria-label="Pantalon foncé, fil argenté">
+                <span class="swatch swatch-navy silver"></span>
+              </button>
+              <span class="thread-label">fil argenté</span>
+            </div>
+          </div>
+
+          <div class="sizes">
+            <span class="sizes-label">Taille</span>
+            <div class="size-options">
+              <button class="size">XS</button>
+              <button class="size">S</button>
+              <button class="size">M</button>
+              <button class="size">L</button>
+              <button class="size">XL</button>
+              <button class="size">XXL</button>
+              <button class="size">XXXL</button>
+            </div>
+          </div>
+
+          <button class="add-to-cart" data-price="129">Ajouter au panier — 129€</button>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ============ FABRICATION ============ -->
+    <section class="section fabrication" id="fabrication">
+      <h2 class="giant-title on-sky">La fabrication</h2>
+      <div class="sky">
+        <ul class="features">
+          <li class="feature f1">Matériaux<br>durables</li>
+          <li class="feature f2">Fil de couture<br>rare</li>
+          <li class="feature f3">Fabrication<br>100% française</li>
+          <li class="feature f4">100% coton<br>Haute qualité</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ LE POURQUOI ============ -->
+    <section class="section pourquoi" id="pourquoi">
+      <h2 class="giant-title">Le pourquoi?</h2>
+      <div class="story">
+        <p>J'ai voulu créer des vêtements simples, de qualité, originaux et surtout discret.</p>
+        <p>Le carré est né.</p>
+        <p>Une marque jeune, ambitieuse, noble et luxueuse.</p>
+        <p class="signature">moi</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+
+    <div class="assurances">
+      <div class="assurance">
+        <p class="assurance-title">Livraison et retours gratuits</p>
+        <p class="assurance-text">Livraison offerte<br>et retours simplifiés sous 14 jours.</p>
+      </div>
+      <div class="assurance">
+        <p class="assurance-title">Paiement sécurisé</p>
+        <p class="assurance-text">Visa, Mastercard, Paypal, Apple pay,<br>American express, Klarna</p>
+      </div>
+    </div>
+
+    <div class="footer-mid">
+      <div class="newsletter">
+        <p class="newsletter-title">S'abonner à la newsletter <span class="chev">⌄</span></p>
+        <p class="newsletter-text">Inscrivez-vous pour recevoir par e-mail toutes les informations sur nos dernières collections, nos produits, nos défilés de mode et nos projets.</p>
+        <form class="newsletter-form" id="newsletterForm">
+          <input type="email" placeholder="Votre adresse e-mail" aria-label="Adresse e-mail" required />
+          <button type="submit">S'ENREGISTRER</button>
+        </form>
+      </div>
+      <div class="help">
+        <p class="help-title">Besoin d'aide? Contactez-nous</p>
+        <p class="help-hours">Du Lundi au Vendredi de 10:00 à 21:00 CET<br>Samedi de 10:00 à 18:00 CET</p>
+        <nav class="help-links">
+          <a href="#">Formulaire de contact</a>
+          <a href="#">Suivre une commande</a>
+          <a href="#">Enregistrer un retour</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="footer-links">
+      <div class="footer-cols">
+        <span>Mentions légales et cookies <span class="chev">⌄</span></span>
+        <span>FAQ <span class="chev">⌄</span></span>
+        <span>Entreprise <span class="chev">⌄</span></span>
+      </div>
+      <div class="socials">
+        <p class="socials-title">Suivez nous</p>
+        <nav>
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">Tiktok</a>
+          <a href="#">X</a>
+          <a href="#">Pinterest</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="fb-brand"><span class="dot">◦</span> Le Carré</span>
+      <span class="fb-logo">Le Carré</span>
+      <span class="fb-region">
+        Pays : France Métropolitaine (EUR)<br>
+        Langage : français <span class="chev">⌄</span>
+      </span>
+    </div>
+
+  </footer>
+
+  <!-- Cart toast -->
+  <div class="cart-toast" id="cartToast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
