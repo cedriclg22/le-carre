@@ -124,7 +124,10 @@ document.querySelectorAll(".product").forEach((card) => {
   const dotsWrap = card.querySelector(".carousel-dots");
   const btn = card.querySelector(".add-to-cart");
 
-  /* liste des slides (HTML) selon le mode ------------------- */
+  const notifyPriceEl = card.querySelector(".notify-price");
+  if (notifyPriceEl) notifyPriceEl.textContent = PRODUCTS[key].prices.argente + "€";
+
+  /* liste des vues (HTML) selon le mode --------------------- */
   function slidesHTML() {
     if (hasImages) {
       const variant = state[key].thread + "-" + state[key].color;
@@ -136,43 +139,73 @@ document.querySelectorAll(".product").forEach((card) => {
     return [0, 1, 2].map((i) => SVG_RENDER[key](thread, i));
   }
 
-  function paintSlides() {
-    const slides = slidesHTML();
-    track.innerHTML = "";
-    slides.forEach((html) => {
-      const slide = document.createElement("div");
-      slide.className = "slide";
-      slide.innerHTML = html;
-      track.appendChild(slide);
-    });
-    // points (créés une seule fois d'après le nb de vues)
-    if (dotsWrap.children.length !== slides.length) {
-      dotsWrap.innerHTML = "";
-      slides.forEach((_, i) => {
-        const dot = document.createElement("button");
-        dot.className = "dot";
-        dot.setAttribute("aria-label", "Vue " + (i + 1));
-        dot.addEventListener("click", () => goTo(i));
-        dotsWrap.appendChild(dot);
-      });
-    }
-    if (state[key].view >= slides.length) state[key].view = 0;
-    goTo(state[key].view);
-  }
+  /* --- carrousel infini : « suivant » avance toujours vers la droite ---
+     Vues physiques : [clone(dernier), vues…, clone(premier)]. */
+  let n = 0;
+  let phys = 1;
+  let animating = false;
 
-  function goTo(i) {
-    const n = track.children.length || 1;
-    state[key].view = (i + n) % n;
-    track.style.transform = `translateX(-${state[key].view * 100}%)`;
-    dotsWrap.querySelectorAll(".dot").forEach((d, idx) =>
-      d.classList.toggle("is-active", idx === state[key].view)
+  function logicalIndex() { return (((phys - 1) % n) + n) % n; }
+
+  function updateDots() {
+    const li = logicalIndex();
+    dotsWrap.querySelectorAll(".dot").forEach((d, i) =>
+      d.classList.toggle("is-active", i === li)
     );
   }
 
-  card.querySelector(".carousel-arrow.prev")
-    .addEventListener("click", () => goTo(state[key].view - 1));
-  card.querySelector(".carousel-arrow.next")
-    .addEventListener("click", () => goTo(state[key].view + 1));
+  function place(i, animate) {
+    phys = i;
+    if (!animate) track.style.transition = "none";
+    track.style.transform = `translateX(-${phys * 100}%)`;
+    if (!animate) {
+      track.getBoundingClientRect(); // force le reflow
+      track.style.transition = "";
+    }
+    updateDots();
+  }
+
+  function paintSlides() {
+    const html = slidesHTML();
+    n = html.length;
+    const seq = [html[n - 1]].concat(html, [html[0]]);
+    track.innerHTML = "";
+    seq.forEach((h) => {
+      const s = document.createElement("div");
+      s.className = "slide";
+      s.innerHTML = h;
+      track.appendChild(s);
+    });
+    dotsWrap.innerHTML = "";
+    for (let i = 0; i < n; i++) {
+      const dot = document.createElement("button");
+      dot.className = "dot";
+      dot.setAttribute("aria-label", "Vue " + (i + 1));
+      dot.addEventListener("click", () => {
+        if (animating || i + 1 === phys) return;
+        animating = true;
+        place(i + 1, true);
+      });
+      dotsWrap.appendChild(dot);
+    }
+    place(1, false); // démarre sur la 1re vraie vue
+  }
+
+  function step(dir) {
+    if (animating || n < 2) return;
+    animating = true;
+    place(phys + dir, true);
+  }
+
+  track.addEventListener("transitionend", (e) => {
+    if (e.propertyName !== "transform") return;
+    if (phys === n + 1) place(1, false);      // au-delà de la fin -> 1re vue
+    else if (phys === 0) place(n, false);     // avant le début -> dernière vue
+    animating = false;
+  });
+
+  card.querySelector(".carousel-arrow.prev").addEventListener("click", () => step(-1));
+  card.querySelector(".carousel-arrow.next").addEventListener("click", () => step(1));
 
   // fil argenté -> mode "prévenez-moi" ; fil doré -> achat direct
   function updateCTA() {
@@ -191,7 +224,6 @@ document.querySelectorAll(".product").forEach((card) => {
       sw.addEventListener("click", () => {
         state[key].thread = sw.dataset.thread;
         state[key].color = sw.dataset.color;
-        state[key].view = 0;
         card.querySelectorAll(".swatch-btn").forEach((s) =>
           s.classList.toggle("is-selected", s === sw)
         );
