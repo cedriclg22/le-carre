@@ -74,6 +74,25 @@ function pantalonSVG(thread, view) {
 
 const SVG_RENDER = { pantalon: pantalonSVG };
 
+/* ---- Couture dans les pastilles (fil doré / argenté) ------ */
+function swatchStitchColor(sw) {
+  const dark = sw.classList.contains("swatch-black") || sw.classList.contains("swatch-navy");
+  if (sw.classList.contains("gold")) return dark ? "#d9b45a" : "#c19a3f";
+  return dark ? "#d3d7dc" : "#8b929c";
+}
+document.querySelectorAll(".swatch").forEach((sw) => {
+  const c = swatchStitchColor(sw);
+  sw.innerHTML =
+    '<svg viewBox="0 0 42 34" preserveAspectRatio="xMidYMid meet" aria-hidden="true">' +
+    '<polyline points="9,24 22,10 33,20" fill="none" stroke="' + c + '"' +
+    ' stroke-width="1.7" stroke-dasharray="2.6 2" stroke-linecap="round" stroke-linejoin="round"/>' +
+    "</svg>";
+});
+
+/* Seul le fil argenté est disponible (le 2 de chaque mois).
+   Le fil doré est visible en aperçu mais pas encore achetable. */
+const AVAILABLE_THREADS = ["argente"];
+
 /* ---- État ------------------------------------------------- */
 let cartCount = 0;
 const state = {};
@@ -146,10 +165,20 @@ document.querySelectorAll(".product").forEach((card) => {
   card.querySelector(".carousel-arrow.next")
     .addEventListener("click", () => goTo(state[key].view + 1));
 
+  function isAvailable() {
+    return AVAILABLE_THREADS.indexOf(state[key].thread) !== -1;
+  }
+
   function setPrice() {
-    const price = PRODUCTS[key].prices[state[key].thread];
-    btn.dataset.price = price;
-    btn.textContent = `Ajouter au panier — ${price}€`;
+    if (isAvailable()) {
+      const price = PRODUCTS[key].prices[state[key].thread];
+      btn.dataset.price = price;
+      btn.classList.remove("is-unavailable");
+      btn.textContent = `Ajouter au panier — ${price}€`;
+    } else {
+      btn.classList.add("is-unavailable");
+      btn.textContent = "Fil doré — bientôt disponible";
+    }
   }
 
   /* --- MODE PHOTOS : pastilles couleur + fil --- */
@@ -192,6 +221,10 @@ document.querySelectorAll(".product").forEach((card) => {
 
   /* ajouter au panier */
   btn.addEventListener("click", () => {
+    if (!isAvailable()) {
+      toast("Le fil doré arrive bientôt — seul le fil argenté est proposé, le 2 de chaque mois.");
+      return;
+    }
     if (!state[key].size) {
       toast("Merci de choisir une taille.");
       card.querySelector(".sizes").animate(
@@ -208,6 +241,7 @@ document.querySelectorAll(".product").forEach((card) => {
     toast(`${p.name}${couleur} · ${fil} · taille ${state[key].size} — ${p.prices[state[key].thread]}€`);
   });
 
+  setPrice();
   paintSlides();
 });
 
