@@ -170,6 +170,37 @@ a { color: inherit; text-decoration: none; }
 
 /* ============ COLLECTION ============ */
 .collection { padding-bottom: 90px; }
+
+/* ---- switch Homme / Femme ---- */
+.gender-switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin: -6px 0 74px;
+}
+.gender-btn {
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  letter-spacing: 0.12em;
+  color: #c2c2c2;
+  padding: 6px 4px;
+  position: relative;
+  transition: color 0.25s ease;
+}
+.gender-btn:hover { color: #8f8f8f; }
+.gender-btn.is-active { color: var(--ink); }
+.gender-btn.is-active::after {
+  content: "";
+  position: absolute;
+  left: 4px; right: 4px; bottom: 0;
+  height: 1px;
+  background: var(--ink);
+}
+.gender-sep { color: #dcdcdc; }
+
 .products {
   max-width: 720px;
   margin: 0 auto;

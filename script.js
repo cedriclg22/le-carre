@@ -8,14 +8,10 @@
    Pantalon : argenté 129€ | doré 219€
 ------------------------------------------------------------- */
 const PRODUCTS = {
-  tshirt: {
-    name: "Le Tshirt",
-    prices: { argente: 89, dore: 139 },
-  },
-  pantalon: {
-    name: "Le Pantalon",
-    prices: { argente: 129, dore: 219 },
-  },
+  tshirt:            { name: "Le Tshirt · Homme",   prices: { argente: 89,  dore: 139 } },
+  pantalon:          { name: "Le Pantalon · Homme", prices: { argente: 129, dore: 219 } },
+  "tshirt-femme":    { name: "Le Tshirt · Femme",   prices: { argente: 89,  dore: 139 } },
+  "pantalon-femme":  { name: "Le Pantalon · Femme", prices: { argente: 129, dore: 219 } },
 };
 
 /* ---- Photos par variante (fil + couleur) ------------------ */
@@ -31,6 +27,17 @@ const IMAGES = {
     "argente-noir":  ["images/pantalon-noir-argent-1.jpg",  "images/pantalon-noir-argent-2.jpg"],
     "dore-clair":    ["images/pantalon-clair-dore-1.jpg",   "images/pantalon-clair-dore-2.jpg"],
     "dore-noir":     ["images/pantalon-noir-dore-1.jpg",    "images/pantalon-noir-dore-2.jpg"],
+  },
+  "tshirt-femme": {
+    "argente-blanc": ["images/femme-tshirt-blanc-argent-1.jpg", "images/femme-tshirt-blanc-argent-2.jpg"],
+    "argente-noir":  ["images/femme-tshirt-noir-argent-1.jpg",  "images/femme-tshirt-noir-argent-2.jpg"],
+    "dore-blanc":    ["images/femme-tshirt-blanc-dore-1.jpg",   "images/femme-tshirt-blanc-dore-2.jpg"],
+    "dore-noir":     ["images/femme-tshirt-noir-dore-1.jpg",    "images/femme-tshirt-noir-dore-2.jpg"],
+  },
+  "pantalon-femme": {
+    "argente-clair": ["images/femme-pantalon-clair-argent-1.jpg", "images/femme-pantalon-clair-argent-2.jpg"],
+    "argente-noir":  ["images/femme-pantalon-noir-argent-1.jpg",  "images/femme-pantalon-noir-argent-2.jpg"],
+    "dore-noir":     ["images/femme-pantalon-noir-dore-1.jpg",    "images/femme-pantalon-noir-dore-2.jpg"],
   },
 };
 
@@ -305,6 +312,21 @@ function toast(msg) {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => el.classList.remove("is-visible"), 2600);
 }
+
+/* ---- Switch Homme / Femme --------------------------------- */
+document.querySelectorAll(".gender-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const g = btn.dataset.gender;
+    document.querySelectorAll(".gender-btn").forEach((b) => {
+      const on = b === btn;
+      b.classList.toggle("is-active", on);
+      b.setAttribute("aria-selected", on ? "true" : "false");
+    });
+    document.querySelectorAll(".products[data-gender]").forEach((p) => {
+      p.hidden = p.dataset.gender !== g;
+    });
+  });
+});
 
 /* ---- Newsletter ------------------------------------------- */
 document.getElementById("newsletterForm").addEventListener("submit", (e) => {

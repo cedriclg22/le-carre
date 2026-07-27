@@ -34,7 +34,13 @@
     <section class="section collection" id="collection">
       <h2 class="giant-title">La collection 1</h2>
 
-      <div class="products">
+      <div class="gender-switch" role="tablist" aria-label="Choisir la collection">
+        <button class="gender-btn is-active" data-gender="homme" role="tab" aria-selected="true">Homme</button>
+        <span class="gender-sep" aria-hidden="true">/</span>
+        <button class="gender-btn" data-gender="femme" role="tab" aria-selected="false">Femme</button>
+      </div>
+
+      <div class="products products-homme" data-gender="homme">
 
         <!-- LE TSHIRT -->
         <article class="product" data-product="tshirt">
@@ -112,6 +118,118 @@
               <button class="swatch-btn" data-thread="dore" data-color="clair" aria-label="Pantalon clair, fil doré">
                 <span class="swatch swatch-lightnavy gold"></span>
               </button>
+              <button class="swatch-btn" data-thread="dore" data-color="noir" aria-label="Pantalon foncé, fil doré">
+                <span class="swatch swatch-navy gold"></span>
+              </button>
+            </div>
+            <div class="variant-group">
+              <button class="swatch-btn is-selected" data-thread="argente" data-color="clair" aria-label="Pantalon clair, fil argenté">
+                <span class="swatch swatch-lightnavy silver"></span>
+              </button>
+              <button class="swatch-btn" data-thread="argente" data-color="noir" aria-label="Pantalon foncé, fil argenté">
+                <span class="swatch swatch-navy silver"></span>
+              </button>
+              <span class="thread-label">fil argenté</span>
+            </div>
+          </div>
+
+          <div class="sizes">
+            <span class="sizes-label">Taille</span>
+            <div class="size-options">
+              <button class="size">XS</button>
+              <button class="size">S</button>
+              <button class="size">M</button>
+              <button class="size">L</button>
+              <button class="size">XL</button>
+              <button class="size">XXL</button>
+              <button class="size">XXXL</button>
+            </div>
+          </div>
+
+          <button class="add-to-cart" data-price="219">Ajouter au panier — 219€</button>
+          <div class="notify">
+            <p class="notify-text"><span class="notify-price"></span> · <em>fil argenté</em> — disponible le 2 de chaque mois, en quantité limitée.</p>
+            <form class="notify-form">
+              <input type="email" placeholder="Votre adresse e-mail" aria-label="Adresse e-mail" required />
+              <button type="submit">Être prévenu la veille du 2</button>
+            </form>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- ===== COLLECTION FEMME ===== -->
+      <div class="products products-femme" data-gender="femme" hidden>
+
+        <!-- LE TSHIRT FEMME -->
+        <article class="product" data-product="tshirt-femme">
+          <h3 class="product-name">Le Tshirt</h3>
+
+          <div class="carousel">
+            <button class="carousel-arrow prev" aria-label="Image précédente">&lt;</button>
+            <div class="carousel-viewport"><div class="carousel-track"></div></div>
+            <button class="carousel-arrow next" aria-label="Image suivante">&gt;</button>
+            <div class="carousel-dots"></div>
+          </div>
+
+          <div class="variants">
+            <div class="variant-group">
+              <span class="thread-label">fil doré</span>
+              <button class="swatch-btn" data-thread="dore" data-color="blanc" aria-label="T-shirt blanc, fil doré">
+                <span class="swatch swatch-white gold"></span>
+              </button>
+              <button class="swatch-btn" data-thread="dore" data-color="noir" aria-label="T-shirt noir, fil doré">
+                <span class="swatch swatch-black gold"></span>
+              </button>
+            </div>
+            <div class="variant-group">
+              <button class="swatch-btn is-selected" data-thread="argente" data-color="blanc" aria-label="T-shirt blanc, fil argenté">
+                <span class="swatch swatch-white silver"></span>
+              </button>
+              <button class="swatch-btn" data-thread="argente" data-color="noir" aria-label="T-shirt noir, fil argenté">
+                <span class="swatch swatch-black silver"></span>
+              </button>
+              <span class="thread-label">fil argenté</span>
+            </div>
+          </div>
+
+          <div class="sizes">
+            <span class="sizes-label">Taille</span>
+            <div class="size-options">
+              <button class="size">XS</button>
+              <button class="size">S</button>
+              <button class="size">M</button>
+              <button class="size">L</button>
+              <button class="size">XL</button>
+              <button class="size">XXL</button>
+              <button class="size">XXXL</button>
+            </div>
+          </div>
+
+          <button class="add-to-cart" data-price="139">Ajouter au panier — 139€</button>
+          <div class="notify">
+            <p class="notify-text"><span class="notify-price"></span> · <em>fil argenté</em> — disponible le 2 de chaque mois, en quantité limitée.</p>
+            <form class="notify-form">
+              <input type="email" placeholder="Votre adresse e-mail" aria-label="Adresse e-mail" required />
+              <button type="submit">Être prévenu la veille du 2</button>
+            </form>
+          </div>
+        </article>
+
+        <!-- LE PANTALON FEMME -->
+        <article class="product" data-product="pantalon-femme">
+          <h3 class="product-name">Le Pantalon</h3>
+
+          <div class="carousel">
+            <button class="carousel-arrow prev" aria-label="Image précédente">&lt;</button>
+            <div class="carousel-viewport"><div class="carousel-track"></div></div>
+            <button class="carousel-arrow next" aria-label="Image suivante">&gt;</button>
+            <div class="carousel-dots"></div>
+          </div>
+
+          <div class="variants">
+            <div class="variant-group">
+              <span class="thread-label">fil doré</span>
               <button class="swatch-btn" data-thread="dore" data-color="noir" aria-label="Pantalon foncé, fil doré">
                 <span class="swatch swatch-navy gold"></span>
               </button>
