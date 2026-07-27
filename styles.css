@@ -209,6 +209,8 @@ a { color: inherit; text-decoration: none; }
   flex-direction: column;
   gap: 120px;
 }
+/* l'attribut hidden doit l'emporter sur display:flex */
+.products[hidden] { display: none; }
 .product { text-align: center; }
 .product-name {
   margin: 0 0 26px;
