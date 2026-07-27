@@ -37,6 +37,7 @@ const IMAGES = {
   "pantalon-femme": {
     "argente-clair": ["images/femme-pantalon-clair-argent-1.jpg", "images/femme-pantalon-clair-argent-2.jpg"],
     "argente-noir":  ["images/femme-pantalon-noir-argent-1.jpg",  "images/femme-pantalon-noir-argent-2.jpg"],
+    "dore-clair":    ["images/femme-pantalon-clair-dore-1.jpg",   "images/femme-pantalon-clair-dore-2.jpg"],
     "dore-noir":     ["images/femme-pantalon-noir-dore-1.jpg",    "images/femme-pantalon-noir-dore-2.jpg"],
   },
 };
