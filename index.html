@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=7" />
+  <link rel="stylesheet" href="styles.css?v=8" />
 </head>
 <body>
 
@@ -159,6 +159,60 @@
               <button type="submit">Être prévenu la veille du 2</button>
             </form>
           </div>
+        </article>
+
+        <!-- LA CHAUSSURE -->
+        <article class="product product--single" data-product="chaussure">
+          <h3 class="product-name">La Chaussure</h3>
+
+          <div class="carousel">
+            <button class="carousel-arrow prev" aria-label="Image précédente">&lt;</button>
+            <div class="carousel-viewport"><div class="carousel-track"></div></div>
+            <button class="carousel-arrow next" aria-label="Image suivante">&gt;</button>
+            <div class="carousel-dots"></div>
+          </div>
+
+          <div class="variants">
+            <div class="variant-group">
+              <span class="thread-label">blanche</span>
+              <button class="swatch-btn is-selected" data-thread="blanc" data-color="or" aria-label="Chaussure blanche, carré or">
+                <span class="swatch swatch-white gold"></span>
+              </button>
+              <button class="swatch-btn" data-thread="blanc" data-color="gris" aria-label="Chaussure blanche, carré gris">
+                <span class="swatch swatch-white grey"></span>
+              </button>
+              <button class="swatch-btn" data-thread="blanc" data-color="noir" aria-label="Chaussure blanche, carré noir">
+                <span class="swatch swatch-white blacksq"></span>
+              </button>
+            </div>
+            <div class="variant-group">
+              <button class="swatch-btn" data-thread="noir" data-color="argent" aria-label="Chaussure noire, carré argent">
+                <span class="swatch swatch-black silver"></span>
+              </button>
+              <button class="swatch-btn" data-thread="noir" data-color="or" aria-label="Chaussure noire, carré or">
+                <span class="swatch swatch-black gold"></span>
+              </button>
+              <button class="swatch-btn" data-thread="noir" data-color="noir" aria-label="Chaussure noire, carré noir">
+                <span class="swatch swatch-black blacksq"></span>
+              </button>
+              <span class="thread-label">noire</span>
+            </div>
+          </div>
+
+          <div class="sizes">
+            <span class="sizes-label">Pointure</span>
+            <div class="size-options">
+              <button class="size">39</button>
+              <button class="size">40</button>
+              <button class="size">41</button>
+              <button class="size">42</button>
+              <button class="size">43</button>
+              <button class="size">44</button>
+              <button class="size">45</button>
+            </div>
+          </div>
+
+          <button class="add-to-cart" data-price="149">Ajouter au panier — 149€</button>
         </article>
 
       </div>
@@ -401,7 +455,7 @@
     <p class="menu-foot">Le Carré</p>
   </aside>
 
-  <script src="cart.js?v=7"></script>
-  <script src="script.js?v=7"></script>
+  <script src="cart.js?v=8"></script>
+  <script src="script.js?v=8"></script>
 </body>
 </html>

@@ -12,6 +12,7 @@ const PRODUCTS = {
   pantalon:          { name: "Le Pantalon · Homme", prices: { argente: 129, dore: 219 } },
   "tshirt-femme":    { name: "Le Tshirt · Femme",   prices: { argente: 89,  dore: 139 } },
   "pantalon-femme":  { name: "Le Pantalon · Femme", prices: { argente: 129, dore: 219 } },
+  "chaussure":       { name: "La Chaussure",        prices: 149 },
 };
 
 /* ---- Photos par variante (fil + couleur) ------------------ */
@@ -39,6 +40,15 @@ const IMAGES = {
     "argente-noir":  ["images/femme-pantalon-noir-argent-1.jpg",  "images/femme-pantalon-noir-argent-2.jpg"],
     "dore-clair":    ["images/femme-pantalon-clair-dore-1.jpg",   "images/femme-pantalon-clair-dore-2.jpg"],
     "dore-noir":     ["images/femme-pantalon-noir-dore-1.jpg",    "images/femme-pantalon-noir-dore-2.jpg"],
+  },
+  // La Chaussure : base (blanc/noir) × carré (or/argent/gris/noir), 1 vue par coloris
+  "chaussure": {
+    "blanc-or":    ["images/chaussure-blanc-or.jpg"],
+    "blanc-gris":  ["images/chaussure-blanc-gris.jpg"],
+    "blanc-noir":  ["images/chaussure-blanc-noir.jpg"],
+    "noir-argent": ["images/chaussure-noir-argent.jpg"],
+    "noir-or":     ["images/chaussure-noir-or.jpg"],
+    "noir-noir":   ["images/chaussure-noir-noir.jpg"],
   },
 };
 
@@ -86,7 +96,9 @@ const SVG_RENDER = { pantalon: pantalonSVG };
 function swatchStitchColor(sw) {
   const dark = sw.classList.contains("swatch-black") || sw.classList.contains("swatch-navy");
   if (sw.classList.contains("gold")) return dark ? "#d9b45a" : "#c19a3f";
-  return dark ? "#d3d7dc" : "#8b929c";
+  if (sw.classList.contains("grey")) return dark ? "#c9cdd2" : "#9aa0a8";
+  if (sw.classList.contains("blacksq")) return dark ? "#5a5a5a" : "#2a2a2a";
+  return dark ? "#d3d7dc" : "#8b929c"; // silver
 }
 document.querySelectorAll(".swatch").forEach((sw) => {
   const c = swatchStitchColor(sw);
@@ -232,12 +244,18 @@ document.querySelectorAll(".product").forEach((card) => {
   card.querySelector(".carousel-arrow.prev").addEventListener("click", () => step(-1));
   card.querySelector(".carousel-arrow.next").addEventListener("click", () => step(1));
 
-  // fil argenté -> mode "prévenez-moi" ; fil doré -> achat direct
+  // prix : objet {argente,dore} (t-shirt/pantalon) ou nombre unique (chaussure)
+  function currentPrice() {
+    const p = PRODUCTS[key].prices;
+    return typeof p === "number" ? p : p[state[key].thread];
+  }
+
+  // fil argenté -> mode "prévenez-moi" ; sinon -> achat direct
   function updateCTA() {
     const silver = state[key].thread === "argente";
     card.classList.toggle("notify-mode", silver);
     if (!silver) {
-      const price = PRODUCTS[key].prices.dore;
+      const price = currentPrice();
       btn.dataset.price = price;
       btn.textContent = `Ajouter au panier — ${price}€`;
     }
@@ -302,14 +320,18 @@ document.querySelectorAll(".product").forEach((card) => {
     }
     const p = PRODUCTS[key];
     const variant = state[key].thread + "-" + state[key].color;
-    const price = p.prices[state[key].thread];
-    const fil = state[key].thread === "dore" ? "fil doré" : "fil argenté";
+    const price = currentPrice();
+    const isShoe = typeof p.prices === "number";
+    const threadLabel = isShoe
+      ? "carré " + state[key].color
+      : (state[key].thread === "dore" ? "fil doré" : "fil argenté");
+    const colorLabel = isShoe ? state[key].thread : state[key].color;
     window.Cart.add({
       id: key + "-" + variant + "-" + state[key].size,
       product: key,
       productName: p.name,
-      thread: fil,
-      color: state[key].color,
+      thread: threadLabel,
+      color: colorLabel,
       size: state[key].size,
       price: price,
       img: (IMAGES[key] && IMAGES[key][variant]) ? IMAGES[key][variant][0] : "",
