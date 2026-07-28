@@ -633,23 +633,43 @@ a { color: inherit; text-decoration: none; }
 
 /* ============ RESPONSIVE ============ */
 @media (max-width: 720px) {
-  .site-header { padding: 18px 20px; }
+  .site-header { padding: 16px 18px; }
   .header-cart { font-size: 0.85rem; }
-  .products { gap: 90px; }
+
+  .gender-switch { margin: 0 0 54px; }
+
+  .products { padding: 0 16px; gap: 76px; }
+  .product-name { margin-bottom: 20px; }
+
+  /* carrousel : flèches plus fines -> image plus grande, moins de vide */
+  .carousel { grid-template-columns: 30px 1fr 30px; gap: 4px; }
+  .carousel-arrow { width: 30px; height: 44px; }
+  .carousel-viewport { min-height: 0; }
+  .slide img { max-height: 68vh; }
+
+  .variants { gap: 16px 26px; margin-top: 22px; }
   .threads { gap: 24px; flex-wrap: wrap; }
-  .sizes { flex-direction: column; gap: 12px; }
+  .sizes { flex-direction: column; gap: 12px; padding: 16px 0; }
+  .size-options { gap: 2px; }
   .features { grid-template-columns: 1fr; gap: 34px; }
   .feature { align-self: center !important; }
 
+  /* footer */
   .assurances,
   .footer-mid,
   .footer-bottom { grid-template-columns: 1fr; }
+  .footer-mid > * { padding: 34px 24px; }
   .assurance:first-child,
   .newsletter { border-right: none; border-bottom: 1px solid var(--line); }
   .footer-bottom { justify-items: center; text-align: center; gap: 16px; }
   .fb-region { justify-self: center; text-align: center; }
-  .footer-links { flex-direction: column; align-items: flex-start; }
-  .socials { text-align: left; }
+  .footer-links { flex-direction: column; align-items: center; text-align: center; padding: 30px 24px; }
+  .footer-cols { justify-content: center; gap: 24px 32px; }
+  .socials { text-align: center; }
+  .socials nav { justify-content: center; }
+
+  /* panier */
+  .cart-drawer { width: 100vw; }
 }
 
 /* ============ PANIER (tiroir) ============ */
@@ -786,6 +806,44 @@ a { color: inherit; text-decoration: none; }
   .checkout-summary { position: static; order: -1; }
 }
 @media (max-width: 720px) {
-  .checkout-header { padding: 18px 20px; }
+  .checkout-header { padding: 16px 18px; }
   .co-secure { display: none; }
+  .checkout { padding: 30px 18px 70px; }
+  .co-row { flex-direction: column; gap: 0; }
+  .co-field-sm { flex: 1; }
+  .checkout-summary { padding: 22px; }
+}
+
+/* ============ PAGE HAUTE COUTURE ============ */
+.couture { padding-bottom: 60px; }
+.couture-intro { text-align: center; padding: 74px 24px 30px; }
+.couture-eyebrow { margin: 0 0 18px; font-size: 0.9rem; letter-spacing: 0.35em; text-transform: uppercase; color: #b0b0b0; }
+.couture-title { margin: 0; font-weight: 400; font-size: clamp(2.6rem, 9vw, 6rem); letter-spacing: 0.04em; color: var(--ink); }
+.couture-lead { margin: 26px auto 0; max-width: 620px; font-size: clamp(1.2rem, 2.6vw, 1.7rem); line-height: 1.5; color: #9a9a9a; }
+.couture-appt { margin: 22px 0 0; font-style: italic; font-size: 1.05rem; letter-spacing: 0.1em; color: #bcbcbc; }
+
+.couture-gallery { max-width: 1100px; margin: 0 auto; padding: 46px 24px; display: flex; flex-direction: column; gap: 120px; }
+.couture-piece { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 54px; align-items: center; }
+.couture-piece:nth-child(even) .cp-media { order: 2; }
+.cp-media img { width: 100%; height: auto; display: block; background: #f6f6f6; }
+.cp-caption { padding: 0 10px; }
+.cp-index { display: block; font-size: 0.9rem; letter-spacing: 0.2em; color: #cccccc; margin-bottom: 16px; }
+.cp-name { margin: 0 0 18px; font-weight: 400; font-size: clamp(1.6rem, 3.4vw, 2.4rem); letter-spacing: 0.04em; color: var(--ink); }
+.cp-desc { margin: 0; font-size: 1.05rem; line-height: 1.7; color: #9a9a9a; max-width: 380px; }
+
+.couture-cta { text-align: center; padding: 70px 24px 30px; border-top: 1px solid var(--line); max-width: 700px; margin: 50px auto 0; }
+.couture-cta-title { margin: 0 0 14px; font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: 0.04em; color: var(--ink); }
+.couture-cta-text { margin: 0 auto 28px; max-width: 460px; font-size: 1.05rem; line-height: 1.6; color: #9a9a9a; }
+.couture-cta-btn { display: inline-block; border: 1px solid var(--charcoal); background: var(--charcoal); color: #fff; padding: 15px 40px; font-size: 1rem; letter-spacing: 0.06em; transition: opacity 0.2s ease; }
+.couture-cta-btn:hover { opacity: 0.88; }
+.couture-back { display: block; margin-top: 28px; font-style: italic; font-size: 0.95rem; color: #8f8f8f; }
+.couture-back:hover { color: var(--ink); }
+
+@media (max-width: 720px) {
+  .couture-intro { padding: 50px 18px 18px; }
+  .couture-gallery { gap: 66px; padding: 32px 18px; }
+  .couture-piece { grid-template-columns: 1fr; gap: 22px; }
+  .couture-piece:nth-child(even) .cp-media { order: 0; }
+  .cp-caption { text-align: center; padding: 0; }
+  .cp-desc { margin: 0 auto; max-width: 100%; }
 }
