@@ -647,7 +647,11 @@ a { color: inherit; text-decoration: none; }
   .carousel-viewport { min-height: 0; }
   .slide img { max-height: 68vh; }
 
-  .variants { gap: 16px 26px; margin-top: 22px; }
+  /* variantes sur UNE seule ligne sur mobile */
+  .variants { flex-wrap: nowrap; gap: 10px; margin-top: 22px; }
+  .variant-group { gap: 5px; }
+  .variants .swatch { width: 33px; height: 26px; }
+  .variants .thread-label { font-size: 0.82rem; white-space: nowrap; }
   .threads { gap: 24px; flex-wrap: wrap; }
   .sizes { flex-direction: column; gap: 12px; padding: 16px 0; }
   .size-options { gap: 2px; }
