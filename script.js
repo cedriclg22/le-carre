@@ -12,7 +12,8 @@ const PRODUCTS = {
   pantalon:          { name: "Le Pantalon · Homme", prices: { argente: 129, dore: 219 } },
   "tshirt-femme":    { name: "Le Tshirt · Femme",   prices: { argente: 89,  dore: 139 } },
   "pantalon-femme":  { name: "Le Pantalon · Femme", prices: { argente: 129, dore: 219 } },
-  "chaussure":       { name: "La Chaussure",        prices: 149 },
+  // prix selon le carré : or 790 · argent 280 · noir 130 · gris (à confirmer) 130
+  "chaussure":       { name: "La Chaussure",        prices: { or: 790, argent: 280, noir: 130, gris: 130 } },
 };
 
 /* ---- Photos par variante (fil + couleur) ------------------ */
@@ -244,10 +245,12 @@ document.querySelectorAll(".product").forEach((card) => {
   card.querySelector(".carousel-arrow.prev").addEventListener("click", () => step(-1));
   card.querySelector(".carousel-arrow.next").addEventListener("click", () => step(1));
 
-  // prix : objet {argente,dore} (t-shirt/pantalon) ou nombre unique (chaussure)
+  // prix : nombre unique, ou par carré (chaussure : clé = couleur), ou par fil (t-shirt/pantalon : clé = thread)
   function currentPrice() {
     const p = PRODUCTS[key].prices;
-    return typeof p === "number" ? p : p[state[key].thread];
+    if (typeof p === "number") return p;
+    if (p[state[key].color] != null) return p[state[key].color];
+    return p[state[key].thread];
   }
 
   // fil argenté -> mode "prévenez-moi" ; sinon -> achat direct
