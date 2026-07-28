@@ -134,18 +134,6 @@ document.querySelectorAll(".product").forEach((card) => {
   const notifyPriceEl = card.querySelector(".notify-price");
   if (notifyPriceEl) notifyPriceEl.textContent = PRODUCTS[key].prices.argente + "€";
 
-  /* liste des vues (HTML) selon le mode --------------------- */
-  function slidesHTML() {
-    if (hasImages) {
-      const variant = state[key].thread + "-" + state[key].color;
-      return IMAGES[key][variant].map(
-        (src) => `<img src="${src}" alt="${PRODUCTS[key].name}" loading="lazy">`
-      );
-    }
-    const thread = THREAD_COLOR[state[key].thread];
-    return [0, 1, 2].map((i) => SVG_RENDER[key](thread, i));
-  }
-
   /* --- carrousel infini : « suivant » avance toujours vers la droite ---
      Vues physiques : [clone(dernier), vues…, clone(premier)]. */
   let n = 0;
@@ -172,17 +160,7 @@ document.querySelectorAll(".product").forEach((card) => {
     updateDots();
   }
 
-  function paintSlides() {
-    const html = slidesHTML();
-    n = html.length;
-    const seq = [html[n - 1]].concat(html, [html[0]]);
-    track.innerHTML = "";
-    seq.forEach((h) => {
-      const s = document.createElement("div");
-      s.className = "slide";
-      s.innerHTML = h;
-      track.appendChild(s);
-    });
+  function buildDots() {
     dotsWrap.innerHTML = "";
     for (let i = 0; i < n; i++) {
       const dot = document.createElement("button");
@@ -195,6 +173,46 @@ document.querySelectorAll(".product").forEach((card) => {
       });
       dotsWrap.appendChild(dot);
     }
+  }
+
+  function paintSlides() {
+    if (hasImages) {
+      const srcs = IMAGES[key][state[key].thread + "-" + state[key].color];
+      n = srcs.length;
+      const seq = [srcs[n - 1]].concat(srcs, [srcs[0]]); // [clone, vues…, clone]
+      const imgs = track.querySelectorAll(".slide img");
+      if (imgs.length === seq.length) {
+        // Changement de variante : on remplace juste le src (même format)
+        // -> la hauteur de l'image ne s'effondre pas, pas de saut de mise en page.
+        imgs.forEach((img, i) => {
+          if (img.getAttribute("src") !== seq[i]) img.setAttribute("src", seq[i]);
+        });
+        place(1, false);
+        return;
+      }
+      track.innerHTML = "";
+      seq.forEach((src) => {
+        const s = document.createElement("div");
+        s.className = "slide";
+        const im = document.createElement("img");
+        im.src = src; im.alt = PRODUCTS[key].name; im.loading = "lazy";
+        s.appendChild(im);
+        track.appendChild(s);
+      });
+    } else {
+      const thread = THREAD_COLOR[state[key].thread];
+      const svg = [0, 1, 2].map((i) => SVG_RENDER[key](thread, i));
+      n = svg.length;
+      const seq = [svg[n - 1]].concat(svg, [svg[0]]);
+      track.innerHTML = "";
+      seq.forEach((h) => {
+        const s = document.createElement("div");
+        s.className = "slide";
+        s.innerHTML = h;
+        track.appendChild(s);
+      });
+    }
+    buildDots();
     place(1, false); // démarre sur la 1re vraie vue
   }
 

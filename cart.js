@@ -105,6 +105,17 @@
     if (ov) ov.addEventListener("click", closeDrawer);
     const co = document.getElementById("cartCheckout");
     if (co) co.addEventListener("click", () => { if (count()) location.href = "checkout.html"; });
+
+    // Menu (hamburger, haut-gauche)
+    const md = document.getElementById("menuDrawer");
+    const mov = document.getElementById("menuOverlay");
+    const menuOpen = () => { if (md) md.classList.add("is-open"); if (mov) mov.classList.add("is-open"); };
+    const menuClose = () => { if (md) md.classList.remove("is-open"); if (mov) mov.classList.remove("is-open"); };
+    document.querySelectorAll(".header-menu").forEach((b) => b.addEventListener("click", menuOpen));
+    const mc = document.getElementById("menuClose");
+    if (mc) mc.addEventListener("click", menuClose);
+    if (mov) mov.addEventListener("click", menuClose);
+    document.querySelectorAll("#menuDrawer a").forEach((a) => a.addEventListener("click", menuClose));
   }
 
   if (document.readyState === "loading")

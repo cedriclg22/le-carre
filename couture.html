@@ -6,14 +6,14 @@
   <title>Le Carré — Haute Couture</title>
   <meta name="description" content="Haute Couture Le Carré — des pièces uniques, façonnées à la main. Le carré poussé à l'extrême du geste couture. Sur rendez-vous." />
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=5" />
+  <link rel="stylesheet" href="styles.css?v=6" />
 </head>
 <body>
 
-  <header class="checkout-header">
-    <a href="index.html" class="co-back" aria-label="Retour à la boutique">←</a>
-    <a href="index.html" class="header-wordmark co-logo">Le Carré</a>
-    <span class="co-secure">Haute Couture</span>
+  <header class="site-header is-solid">
+    <button class="header-menu" aria-label="Menu"><span></span><span></span></button>
+    <a href="index.html" class="header-wordmark">Le Carré</a>
+    <button class="header-cart" aria-label="Panier">Panier <span class="cart-count" id="cartCount">0</span></button>
   </header>
 
   <main class="couture">
@@ -65,5 +65,37 @@
 
   </main>
 
+  <!-- Menu (tiroir gauche) -->
+  <div class="menu-overlay" id="menuOverlay"></div>
+  <aside class="menu-drawer" id="menuDrawer" aria-label="Menu">
+    <button class="menu-close" id="menuClose" aria-label="Fermer le menu">✕</button>
+    <nav class="menu-nav">
+      <a href="index.html">La boutique</a>
+      <a href="index.html#collection">La collection</a>
+      <a href="couture.html">Haute Couture</a>
+      <a href="index.html#fabrication">La fabrication</a>
+      <a href="index.html#pourquoi">Le pourquoi ?</a>
+    </nav>
+    <p class="menu-foot">Le Carré</p>
+  </aside>
+
+  <!-- Panier (tiroir droit) -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Panier">
+    <div class="cart-head">
+      <span class="cart-title">Votre panier</span>
+      <button class="cart-close" id="cartClose" aria-label="Fermer le panier">✕</button>
+    </div>
+    <div class="cart-body" id="cartBody"></div>
+    <div class="cart-foot">
+      <div class="cart-total-row"><span>Total</span><span id="cartTotal">0€</span></div>
+      <button class="cart-checkout" id="cartCheckout" disabled>Passer au paiement</button>
+      <p class="cart-foot-note">Livraison offerte · retours simplifiés sous 14 jours</p>
+    </div>
+  </aside>
+
+  <div class="cart-toast" id="cartToast" role="status" aria-live="polite"></div>
+
+  <script src="cart.js?v=6"></script>
 </body>
 </html>

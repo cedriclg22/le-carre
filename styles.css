@@ -64,17 +64,30 @@ a { color: inherit; text-decoration: none; }
   -webkit-backdrop-filter: blur(14px);
   border-bottom-color: rgba(231, 231, 231, 0.7);
 }
-.header-menu,
+/* le menu (hamburger) reste toujours visible ; le panier n'apparaît qu'au scroll */
 .header-cart {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.35s ease;
 }
-.site-header.is-visible .header-menu,
-.site-header.is-visible .header-cart {
+.site-header.is-visible .header-cart,
+.site-header.is-solid .header-cart {
   opacity: 1;
   pointer-events: auto;
 }
+.header-menu { filter: drop-shadow(0 1px 3px rgba(80, 110, 140, 0.5)); transition: filter 0.4s ease; }
+.site-header.is-visible .header-menu,
+.site-header.is-solid .header-menu { filter: none; }
+
+/* header solide (page couture) */
+.site-header.is-solid {
+  position: sticky;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom-color: rgba(231, 231, 231, 0.7);
+}
+.site-header.is-solid .header-wordmark { color: var(--ink); text-shadow: none; }
 .header-wordmark {
   grid-column: 2;
   font-size: clamp(1.4rem, 2.4vw, 1.9rem);
@@ -101,9 +114,12 @@ a { color: inherit; text-decoration: none; }
 }
 .header-menu span {
   width: 26px;
-  height: 1px;
-  background: var(--ink);
+  height: 1.5px;
+  background: #ffffff;
+  transition: background 0.4s ease;
 }
+.site-header.is-visible .header-menu span,
+.site-header.is-solid .header-menu span { background: var(--ink); }
 .header-cart {
   justify-self: end;
   border: none;
@@ -675,6 +691,39 @@ a { color: inherit; text-decoration: none; }
   /* panier */
   .cart-drawer { width: 100vw; }
 }
+
+/* ============ MENU (tiroir gauche) ============ */
+.menu-overlay {
+  position: fixed; inset: 0; z-index: 90;
+  background: rgba(20, 20, 20, 0.32);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+.menu-overlay.is-open { opacity: 1; pointer-events: auto; }
+.menu-drawer {
+  position: fixed; top: 0; left: 0; bottom: 0; z-index: 95;
+  width: min(360px, 86vw);
+  background: #fff;
+  transform: translateX(-100%);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 20px 0 60px rgba(0, 0, 0, 0.08);
+  display: flex; flex-direction: column;
+  padding: 24px 30px 30px;
+}
+.menu-drawer.is-open { transform: translateX(0); }
+.menu-close { align-self: flex-end; border: none; background: none; font-size: 1rem; color: #8f8f8f; }
+.menu-close:hover { color: var(--ink); }
+.menu-nav { display: flex; flex-direction: column; margin-top: 26px; }
+.menu-nav a {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
+  transition: color 0.2s ease;
+}
+.menu-nav a:hover { color: #8f8f8f; }
+.menu-foot { margin-top: auto; font-size: 1rem; letter-spacing: 0.2em; color: #cfcfcf; }
 
 /* ============ PANIER (tiroir) ============ */
 .cart-count.has-items { background: var(--charcoal); }

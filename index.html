@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=5" />
+  <link rel="stylesheet" href="styles.css?v=6" />
 </head>
 <body>
 
@@ -382,7 +382,21 @@
     </div>
   </aside>
 
-  <script src="cart.js?v=5"></script>
-  <script src="script.js?v=5"></script>
+  <!-- Menu (tiroir gauche) -->
+  <div class="menu-overlay" id="menuOverlay"></div>
+  <aside class="menu-drawer" id="menuDrawer" aria-label="Menu">
+    <button class="menu-close" id="menuClose" aria-label="Fermer le menu">✕</button>
+    <nav class="menu-nav">
+      <a href="index.html">La boutique</a>
+      <a href="index.html#collection">La collection</a>
+      <a href="couture.html">Haute Couture</a>
+      <a href="index.html#fabrication">La fabrication</a>
+      <a href="index.html#pourquoi">Le pourquoi ?</a>
+    </nav>
+    <p class="menu-foot">Le Carré</p>
+  </aside>
+
+  <script src="cart.js?v=6"></script>
+  <script src="script.js?v=6"></script>
 </body>
 </html>
