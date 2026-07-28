@@ -132,6 +132,8 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   gap: 8px;
 }
+.cart-icon { display: none; width: 21px; height: 21px; }
+.cart-label { display: inline; }
 .cart-count {
   display: inline-grid;
   place-items: center;
@@ -650,7 +652,10 @@ a { color: inherit; text-decoration: none; }
 /* ============ RESPONSIVE ============ */
 @media (max-width: 720px) {
   .site-header { padding: 16px 18px; }
-  .header-cart { font-size: 0.85rem; }
+  /* mobile : le mot « Panier » laisse place à un picto */
+  .header-cart { font-size: 0.85rem; gap: 6px; }
+  .cart-label { display: none; }
+  .cart-icon { display: block; }
 
   .gender-switch { margin: 0 0 54px; }
 

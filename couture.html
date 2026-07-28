@@ -6,14 +6,21 @@
   <title>Le Carré — Haute Couture</title>
   <meta name="description" content="Haute Couture Le Carré — des pièces uniques, façonnées à la main. Le carré poussé à l'extrême du geste couture. Sur rendez-vous." />
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=6" />
+  <link rel="stylesheet" href="styles.css?v=7" />
 </head>
 <body>
 
   <header class="site-header is-solid">
     <button class="header-menu" aria-label="Menu"><span></span><span></span></button>
     <a href="index.html" class="header-wordmark">Le Carré</a>
-    <button class="header-cart" aria-label="Panier">Panier <span class="cart-count" id="cartCount">0</span></button>
+    <button class="header-cart" aria-label="Panier">
+      <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M5.5 8 H18.5 L17.5 20.5 H6.5 Z" />
+        <path d="M9 8 V6.5 a3 3 0 0 1 6 0 V8" />
+      </svg>
+      <span class="cart-label">Panier</span>
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
   </header>
 
   <main class="couture">
@@ -96,6 +103,6 @@
 
   <div class="cart-toast" id="cartToast" role="status" aria-live="polite"></div>
 
-  <script src="cart.js?v=6"></script>
+  <script src="cart.js?v=7"></script>
 </body>
 </html>
