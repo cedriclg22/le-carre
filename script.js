@@ -13,32 +13,41 @@ const PRODUCTS = {
   pantalon:          { name: "Le Pantalon · Homme", prices: { carbone: 99,  platine: 129, or: 219 } },
   "tshirt-femme":    { name: "Le Tshirt · Femme",   prices: { carbone: 59,  platine: 89,  or: 139 } },
   "pantalon-femme":  { name: "Le Pantalon · Femme", prices: { carbone: 99,  platine: 129, or: 219 } },
-  "chaussure":       { name: "La Chaussure",        prices: { carbone: 130, platine: 280, or: 790 } },
+  "chaussure":       { name: "La Chaussure · Homme", prices: { carbone: 130, platine: 280, or: 790 } },
+  "chaussure-femme": { name: "La Chaussure · Femme", prices: { carbone: 130, platine: 280, or: 790 } },
 };
 
-/* ---- Photos par GAMME (chaque gamme = toutes ses vues, coloris confondus) ---- */
+/* ---- Photos ---------------------------------------------------------
+   Vêtements : IMAGES[produit][gamme][couleur] = [vues]  (gamme + couleur)
+   Chaussure : IMAGES[produit][gamme]          = [vues]  (gamme seule)
+--------------------------------------------------------------------- */
 const IMAGES = {
   tshirt: {
-    carbone: ["images/tshirt-blanc-carbone-1.jpg","images/tshirt-blanc-carbone-2.jpg","images/tshirt-noir-carbone-1.jpg","images/tshirt-noir-carbone-2.jpg"],
-    platine: ["images/tshirt-blanc-argent-1.jpg","images/tshirt-blanc-argent-2.jpg","images/tshirt-noir-argent-1.jpg","images/tshirt-noir-argent-2.jpg"],
-    or:      ["images/tshirt-blanc-dore-1.jpg","images/tshirt-blanc-dore-2.jpg","images/tshirt-noir-dore-1.jpg","images/tshirt-noir-dore-2.jpg"],
+    carbone: { blanc: ["images/tshirt-blanc-carbone-1.jpg","images/tshirt-blanc-carbone-2.jpg"], noir: ["images/tshirt-noir-carbone-1.jpg","images/tshirt-noir-carbone-2.jpg"] },
+    platine: { blanc: ["images/tshirt-blanc-argent-1.jpg","images/tshirt-blanc-argent-2.jpg"], noir: ["images/tshirt-noir-argent-1.jpg","images/tshirt-noir-argent-2.jpg"] },
+    or:      { blanc: ["images/tshirt-blanc-dore-1.jpg","images/tshirt-blanc-dore-2.jpg"], noir: ["images/tshirt-noir-dore-1.jpg","images/tshirt-noir-dore-2.jpg"] },
   },
   pantalon: {
-    carbone: ["images/pantalon-clair-carbone-1.jpg","images/pantalon-clair-carbone-2.jpg","images/pantalon-noir-carbone-1.jpg","images/pantalon-noir-carbone-2.jpg"],
-    platine: ["images/pantalon-clair-argent-1.jpg","images/pantalon-clair-argent-2.jpg","images/pantalon-noir-argent-1.jpg","images/pantalon-noir-argent-2.jpg"],
-    or:      ["images/pantalon-clair-dore-1.jpg","images/pantalon-clair-dore-2.jpg","images/pantalon-noir-dore-1.jpg","images/pantalon-noir-dore-2.jpg"],
+    carbone: { clair: ["images/pantalon-clair-carbone-1.jpg","images/pantalon-clair-carbone-2.jpg"], noir: ["images/pantalon-noir-carbone-1.jpg","images/pantalon-noir-carbone-2.jpg"] },
+    platine: { clair: ["images/pantalon-clair-argent-1.jpg","images/pantalon-clair-argent-2.jpg"], noir: ["images/pantalon-noir-argent-1.jpg","images/pantalon-noir-argent-2.jpg"] },
+    or:      { clair: ["images/pantalon-clair-dore-1.jpg","images/pantalon-clair-dore-2.jpg"], noir: ["images/pantalon-noir-dore-1.jpg","images/pantalon-noir-dore-2.jpg"] },
   },
   "tshirt-femme": {
-    // pas encore de gamme Carbone pour le t-shirt femme
-    platine: ["images/femme-tshirt-blanc-argent-1.jpg","images/femme-tshirt-blanc-argent-2.jpg","images/femme-tshirt-noir-argent-1.jpg","images/femme-tshirt-noir-argent-2.jpg"],
-    or:      ["images/femme-tshirt-blanc-dore-1.jpg","images/femme-tshirt-blanc-dore-2.jpg","images/femme-tshirt-noir-dore-1.jpg","images/femme-tshirt-noir-dore-2.jpg"],
+    carbone: { blanc: ["images/femme-tshirt-blanc-carbone-1.jpg","images/femme-tshirt-blanc-carbone-2.jpg"], noir: ["images/femme-tshirt-noir-carbone-1.jpg","images/femme-tshirt-noir-carbone-2.jpg"] },
+    platine: { blanc: ["images/femme-tshirt-blanc-argent-1.jpg","images/femme-tshirt-blanc-argent-2.jpg"], noir: ["images/femme-tshirt-noir-argent-1.jpg","images/femme-tshirt-noir-argent-2.jpg"] },
+    or:      { blanc: ["images/femme-tshirt-blanc-dore-1.jpg","images/femme-tshirt-blanc-dore-2.jpg"], noir: ["images/femme-tshirt-noir-dore-1.jpg","images/femme-tshirt-noir-dore-2.jpg"] },
   },
   "pantalon-femme": {
-    carbone: ["images/femme-pantalon-clair-carbone-1.jpg","images/femme-pantalon-clair-carbone-2.jpg","images/femme-pantalon-noir-carbone-1.jpg","images/femme-pantalon-noir-carbone-2.jpg"],
-    platine: ["images/femme-pantalon-clair-argent-1.jpg","images/femme-pantalon-clair-argent-2.jpg","images/femme-pantalon-noir-argent-1.jpg","images/femme-pantalon-noir-argent-2.jpg"],
-    or:      ["images/femme-pantalon-clair-dore-1.jpg","images/femme-pantalon-clair-dore-2.jpg","images/femme-pantalon-noir-dore-1.jpg","images/femme-pantalon-noir-dore-2.jpg"],
+    carbone: { clair: ["images/femme-pantalon-clair-carbone-1.jpg","images/femme-pantalon-clair-carbone-2.jpg"], noir: ["images/femme-pantalon-noir-carbone-1.jpg","images/femme-pantalon-noir-carbone-2.jpg"] },
+    platine: { clair: ["images/femme-pantalon-clair-argent-1.jpg","images/femme-pantalon-clair-argent-2.jpg"], noir: ["images/femme-pantalon-noir-argent-1.jpg","images/femme-pantalon-noir-argent-2.jpg"] },
+    or:      { clair: ["images/femme-pantalon-clair-dore-1.jpg","images/femme-pantalon-clair-dore-2.jpg"], noir: ["images/femme-pantalon-noir-dore-1.jpg","images/femme-pantalon-noir-dore-2.jpg"] },
   },
   chaussure: {
+    carbone: ["images/chaussure-blanc-noir.jpg","images/chaussure-noir-noir.jpg"],
+    platine: ["images/chaussure-noir-argent.jpg"],
+    or:      ["images/chaussure-blanc-or.jpg","images/chaussure-noir-or.jpg"],
+  },
+  "chaussure-femme": {
     carbone: ["images/chaussure-blanc-noir.jpg","images/chaussure-noir-noir.jpg"],
     platine: ["images/chaussure-noir-argent.jpg"],
     or:      ["images/chaussure-blanc-or.jpg","images/chaussure-noir-or.jpg"],
@@ -46,13 +55,15 @@ const IMAGES = {
 };
 
 const GAMME_NAME = { carbone: "Carbone", platine: "Platine", or: "Or" };
+const COLOR_NAME = { blanc: "blanc", noir: "noir", clair: "clair" };
 
-/* Précharge toutes les photos -> bascule de gamme instantanée, pas de saut. */
+/* Précharge toutes les photos -> bascule instantanée, pas de saut. */
 window.addEventListener("load", () => setTimeout(() => {
-  Object.keys(IMAGES).forEach((pk) =>
-    Object.keys(IMAGES[pk]).forEach((v) =>
-      IMAGES[pk][v].forEach((src) => { const im = new Image(); im.src = src; })
-    )
+  Object.values(IMAGES).forEach((prod) =>
+    Object.values(prod).forEach((g) => {
+      const lists = Array.isArray(g) ? [g] : Object.values(g);
+      lists.forEach((list) => list.forEach((src) => { const im = new Image(); im.src = src; }));
+    })
   );
 }, 250));
 
@@ -65,9 +76,21 @@ document.querySelectorAll(".product").forEach((card) => {
 
   // gamme par défaut = bouton pré-sélectionné, sinon 1re gamme dispo
   const preselected = card.querySelector(".gamme-btn.is-selected") || card.querySelector(".gamme-btn");
-  state[key] = { gamme: preselected ? preselected.dataset.gamme : "carbone", size: null };
-  if (preselected) {
-    card.querySelectorAll(".gamme-btn").forEach((g) => g.classList.toggle("is-selected", g === preselected));
+  const preColor = card.querySelector(".color-btn.is-selected") || card.querySelector(".color-btn");
+  state[key] = {
+    gamme: preselected ? preselected.dataset.gamme : "carbone",
+    color: preColor ? preColor.dataset.color : null,
+    size: null,
+  };
+  if (preselected) card.querySelectorAll(".gamme-btn").forEach((g) => g.classList.toggle("is-selected", g === preselected));
+  if (preColor) card.querySelectorAll(".color-btn").forEach((c) => c.classList.toggle("is-selected", c === preColor));
+
+  // photos de la sélection courante (gamme [+ couleur pour les vêtements])
+  function currentImages() {
+    const g = IMAGES[key][state[key].gamme];
+    if (!g) return [];
+    if (Array.isArray(g)) return g;                       // chaussure : liste directe
+    return g[state[key].color] || g[Object.keys(g)[0]];   // vêtement : par couleur
   }
 
   const track = card.querySelector(".carousel-track");
@@ -116,7 +139,7 @@ document.querySelectorAll(".product").forEach((card) => {
   }
 
   function paintSlides() {
-    const srcs = IMAGES[key][state[key].gamme] || [];
+    const srcs = currentImages();
     n = srcs.length;
     carousel.classList.toggle("single", n < 2);
     // >1 vue : on ajoute des clones aux extrémités pour un défilement infini
@@ -178,6 +201,17 @@ document.querySelectorAll(".product").forEach((card) => {
     });
   });
 
+  /* --- sélection de la couleur du vêtement --- */
+  card.querySelectorAll(".color-btn").forEach((cb) => {
+    cb.addEventListener("click", () => {
+      state[key].color = cb.dataset.color;
+      card.querySelectorAll(".color-btn").forEach((c) =>
+        c.classList.toggle("is-selected", c === cb)
+      );
+      paintSlides();
+    });
+  });
+
   /* tailles */
   card.querySelectorAll(".size").forEach((sBtn) => {
     sBtn.addEventListener("click", () => {
@@ -200,14 +234,17 @@ document.querySelectorAll(".product").forEach((card) => {
     }
     const p = PRODUCTS[key];
     const gamme = state[key].gamme;
+    const color = state[key].color;
+    const imgs = currentImages();
     window.Cart.add({
-      id: key + "-" + gamme + "-" + state[key].size,
+      id: key + "-" + gamme + "-" + (color || "") + "-" + state[key].size,
       product: key,
       productName: p.name,
       gamme: GAMME_NAME[gamme] || gamme,
+      color: color ? (COLOR_NAME[color] || color) : "",
       size: state[key].size,
       price: currentPrice(),
-      img: (IMAGES[key][gamme] || [])[0] || "",
+      img: imgs[0] || "",
     });
     window.Cart.open();
     toast(`${p.name} ajouté au panier`);

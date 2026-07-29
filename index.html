@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=11" />
+  <link rel="stylesheet" href="styles.css?v=12" />
 </head>
 <body>
 
@@ -45,6 +45,8 @@
         <button class="gender-btn" data-gender="femme" role="tab" aria-selected="false">Femme</button>
       </div>
 
+      <p class="drop-note">Nouveaux exemplaires le 2 de chaque mois</p>
+
       <div class="products products-homme" data-gender="homme">
 
         <!-- LE TSHIRT -->
@@ -64,6 +66,11 @@
             <button class="gamme-btn is-selected" data-gamme="carbone"><span class="gamme-sq carbone" aria-hidden="true"></span>Carbone</button>
             <button class="gamme-btn" data-gamme="platine"><span class="gamme-sq platine" aria-hidden="true"></span>Platine</button>
             <button class="gamme-btn" data-gamme="or"><span class="gamme-sq or" aria-hidden="true"></span>Or</button>
+          </div>
+
+          <div class="colors">
+            <button class="color-btn is-selected" data-color="blanc" aria-label="Blanc"><span class="color-chip chip-white"></span></button>
+            <button class="color-btn" data-color="noir" aria-label="Noir"><span class="color-chip chip-black"></span></button>
           </div>
 
           <div class="sizes">
@@ -98,6 +105,11 @@
             <button class="gamme-btn is-selected" data-gamme="carbone"><span class="gamme-sq carbone" aria-hidden="true"></span>Carbone</button>
             <button class="gamme-btn" data-gamme="platine"><span class="gamme-sq platine" aria-hidden="true"></span>Platine</button>
             <button class="gamme-btn" data-gamme="or"><span class="gamme-sq or" aria-hidden="true"></span>Or</button>
+          </div>
+
+          <div class="colors">
+            <button class="color-btn is-selected" data-color="clair" aria-label="Clair"><span class="color-chip chip-lightdenim"></span></button>
+            <button class="color-btn" data-color="noir" aria-label="Foncé"><span class="color-chip chip-darkdenim"></span></button>
           </div>
 
           <div class="sizes">
@@ -165,8 +177,14 @@
           </div>
 
           <div class="gammes">
-            <button class="gamme-btn is-selected" data-gamme="platine"><span class="gamme-sq platine" aria-hidden="true"></span>Platine</button>
+            <button class="gamme-btn is-selected" data-gamme="carbone"><span class="gamme-sq carbone" aria-hidden="true"></span>Carbone</button>
+            <button class="gamme-btn" data-gamme="platine"><span class="gamme-sq platine" aria-hidden="true"></span>Platine</button>
             <button class="gamme-btn" data-gamme="or"><span class="gamme-sq or" aria-hidden="true"></span>Or</button>
+          </div>
+
+          <div class="colors">
+            <button class="color-btn is-selected" data-color="blanc" aria-label="Blanc"><span class="color-chip chip-white"></span></button>
+            <button class="color-btn" data-color="noir" aria-label="Noir"><span class="color-chip chip-black"></span></button>
           </div>
 
           <div class="sizes">
@@ -201,6 +219,11 @@
             <button class="gamme-btn" data-gamme="or"><span class="gamme-sq or" aria-hidden="true"></span>Or</button>
           </div>
 
+          <div class="colors">
+            <button class="color-btn is-selected" data-color="clair" aria-label="Clair"><span class="color-chip chip-lightdenim"></span></button>
+            <button class="color-btn" data-color="noir" aria-label="Foncé"><span class="color-chip chip-darkdenim"></span></button>
+          </div>
+
           <div class="sizes">
             <span class="sizes-label">Taille</span>
             <div class="size-options">
@@ -215,6 +238,39 @@
           </div>
 
           <button class="add-to-cart" data-price="219">Ajouter au panier — 219€</button>        </article>
+
+        <!-- LA CHAUSSURE FEMME -->
+        <article class="product" data-product="chaussure-femme">
+          <h3 class="product-name">La Chaussure</h3>
+
+          <div class="carousel">
+            <button class="carousel-arrow prev" aria-label="Image précédente">&lt;</button>
+            <div class="carousel-viewport"><div class="carousel-track"></div></div>
+            <button class="carousel-arrow next" aria-label="Image suivante">&gt;</button>
+            <div class="carousel-dots"></div>
+          </div>
+
+          <div class="gammes">
+            <button class="gamme-btn is-selected" data-gamme="carbone"><span class="gamme-sq carbone" aria-hidden="true"></span>Carbone</button>
+            <button class="gamme-btn" data-gamme="platine"><span class="gamme-sq platine" aria-hidden="true"></span>Platine</button>
+            <button class="gamme-btn" data-gamme="or"><span class="gamme-sq or" aria-hidden="true"></span>Or</button>
+          </div>
+
+          <div class="sizes">
+            <span class="sizes-label">Pointure</span>
+            <div class="size-options">
+              <button class="size">39</button>
+              <button class="size">40</button>
+              <button class="size">41</button>
+              <button class="size">42</button>
+              <button class="size">43</button>
+              <button class="size">44</button>
+              <button class="size">45</button>
+            </div>
+          </div>
+
+          <button class="add-to-cart" data-price="130">Ajouter au panier — 130€</button>
+        </article>
 
       </div>
     </section>
@@ -367,7 +423,7 @@
     <p class="menu-foot">Le Carré</p>
   </aside>
 
-  <script src="cart.js?v=11"></script>
-  <script src="script.js?v=11"></script>
+  <script src="cart.js?v=12"></script>
+  <script src="script.js?v=12"></script>
 </body>
 </html>

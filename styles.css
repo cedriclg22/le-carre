@@ -340,6 +340,26 @@ a { color: inherit; text-decoration: none; }
 .gamme-sq.or      { --g: #c6a24e; }
 .gamme-btn.is-selected .gamme-sq { box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--g); }
 
+/* ---- choix de la couleur du vêtement ---- */
+.colors { display: flex; justify-content: center; gap: 14px; margin: 2px 0 8px; }
+.color-btn { border: none; background: none; padding: 4px; line-height: 0; }
+.color-chip { display: block; width: 24px; height: 24px; border: 1px solid rgba(0, 0, 0, 0.15); }
+.chip-white { background: #fbfbfb; }
+.chip-black { background: #161616; }
+.chip-lightdenim { background: #cdd9e8; }
+.chip-darkdenim { background: #1b2233; }
+.color-btn.is-selected .color-chip { outline: 1px solid var(--ink); outline-offset: 2px; }
+
+/* ---- mention drop ---- */
+.drop-note {
+  text-align: center;
+  margin: -44px 0 52px;
+  font-style: italic;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: #a8a8a8;
+}
+
 /* ---- variantes (couleur + fil) — legacy ---- */
 .variants {
   display: flex;
