@@ -43,14 +43,14 @@ const IMAGES = {
     or:      { clair: ["images/femme-pantalon-clair-dore-1.jpg","images/femme-pantalon-clair-dore-2.jpg"], noir: ["images/femme-pantalon-noir-dore-1.jpg","images/femme-pantalon-noir-dore-2.jpg"] },
   },
   chaussure: {
-    carbone: ["images/chaussure-blanc-noir.jpg","images/chaussure-noir-noir.jpg"],
-    platine: ["images/chaussure-noir-argent.jpg"],
-    or:      ["images/chaussure-blanc-or.jpg","images/chaussure-noir-or.jpg"],
+    carbone: { blanc: ["images/chaussure-blanc-noir.jpg"], noir: ["images/chaussure-noir-noir.jpg"] },
+    platine: { blanc: ["images/chaussure-blanc-gris.jpg"], noir: ["images/chaussure-noir-argent.jpg"] },
+    or:      { blanc: ["images/chaussure-blanc-or.jpg"], noir: ["images/chaussure-noir-or.jpg"] },
   },
   "chaussure-femme": {
-    carbone: ["images/chaussure-blanc-noir.jpg","images/chaussure-noir-noir.jpg"],
-    platine: ["images/chaussure-noir-argent.jpg"],
-    or:      ["images/chaussure-blanc-or.jpg","images/chaussure-noir-or.jpg"],
+    carbone: { blanc: ["images/chaussure-blanc-noir.jpg"], noir: ["images/chaussure-noir-noir.jpg"] },
+    platine: { blanc: ["images/chaussure-blanc-gris.jpg"], noir: ["images/chaussure-noir-argent.jpg"] },
+    or:      { blanc: ["images/chaussure-blanc-or.jpg"], noir: ["images/chaussure-noir-or.jpg"] },
   },
 };
 
