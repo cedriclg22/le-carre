@@ -293,10 +293,10 @@ a { color: inherit; text-decoration: none; }
 }
 .dot.is-active { background: #9a9a9a; }
 
-/* produit à une seule vue (ex. La Chaussure) : pas de flèches ni de points */
-.product--single .carousel { grid-template-columns: 1fr; }
-.product--single .carousel-arrow,
-.product--single .carousel-dots { display: none; }
+/* gamme à une seule vue : pas de flèches ni de points */
+.carousel.single { grid-template-columns: 1fr; }
+.carousel.single .carousel-arrow,
+.carousel.single .carousel-dots { display: none; }
 
 .product-note {
   margin: 20px 0 4px;
@@ -306,7 +306,41 @@ a { color: inherit; text-decoration: none; }
   color: #b0b0b0;
 }
 
-/* ---- variantes (couleur + fil) ---- */
+/* ---- gammes (Carbone / Platine / Or) ---- */
+.gammes {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px 30px;
+  margin: 26px 0 8px;
+}
+.gamme-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  color: #a4a4a4;
+  padding: 6px 2px;
+  transition: color 0.2s ease;
+}
+.gamme-btn:hover { color: #6f6f6f; }
+.gamme-btn.is-selected { color: var(--ink); }
+.gamme-sq {
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--g, #cccccc);
+  transition: box-shadow 0.2s ease;
+}
+.gamme-sq.carbone { --g: #3a3a3a; }
+.gamme-sq.platine { --g: #aeb7bf; }
+.gamme-sq.or      { --g: #c6a24e; }
+.gamme-btn.is-selected .gamme-sq { box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--g); }
+
+/* ---- variantes (couleur + fil) — legacy ---- */
 .variants {
   display: flex;
   justify-content: center;
