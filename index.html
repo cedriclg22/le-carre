@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=9" />
+  <link rel="stylesheet" href="styles.css?v=10" />
 </head>
 <body>
 
@@ -175,25 +175,25 @@
           <div class="variants">
             <div class="variant-group">
               <span class="thread-label">blanche</span>
-              <button class="swatch-btn is-selected" data-thread="blanc" data-color="or" aria-label="Chaussure blanche, carré or">
-                <span class="swatch swatch-white gold"></span>
+              <button class="swatch-btn" data-thread="blanc" data-color="noir" aria-label="Chaussure blanche, carré noir">
+                <span class="swatch swatch-white blacksq"></span>
               </button>
               <button class="swatch-btn" data-thread="blanc" data-color="gris" aria-label="Chaussure blanche, carré gris">
                 <span class="swatch swatch-white grey"></span>
               </button>
-              <button class="swatch-btn" data-thread="blanc" data-color="noir" aria-label="Chaussure blanche, carré noir">
-                <span class="swatch swatch-white blacksq"></span>
+              <button class="swatch-btn is-selected" data-thread="blanc" data-color="or" aria-label="Chaussure blanche, carré or">
+                <span class="swatch swatch-white gold"></span>
               </button>
             </div>
             <div class="variant-group">
+              <button class="swatch-btn" data-thread="noir" data-color="noir" aria-label="Chaussure noire, carré carbone">
+                <span class="swatch swatch-black blacksq"></span>
+              </button>
               <button class="swatch-btn" data-thread="noir" data-color="argent" aria-label="Chaussure noire, carré argent">
                 <span class="swatch swatch-black silver"></span>
               </button>
               <button class="swatch-btn" data-thread="noir" data-color="or" aria-label="Chaussure noire, carré or">
                 <span class="swatch swatch-black gold"></span>
-              </button>
-              <button class="swatch-btn" data-thread="noir" data-color="noir" aria-label="Chaussure noire, carré noir">
-                <span class="swatch swatch-black blacksq"></span>
               </button>
               <span class="thread-label">noire</span>
             </div>
@@ -333,6 +333,31 @@
       </div>
     </section>
 
+    <!-- ============ L'HISTOIRE ============ -->
+    <section class="section histoire" id="histoire">
+      <h2 class="giant-title">L'histoire</h2>
+      <div class="histoire-intro">
+        <p>Le Carré est une marque de mode construite autour de formes géométriques simples — particulièrement le carré — travaillées avec précision dans les coupes, les volumes et les détails. Chaque pièce est réalisée avec des matériaux haut de gamme, et proposée en trois versions.</p>
+      </div>
+      <div class="tiers">
+        <div class="tier tier--carbone">
+          <span class="tier-name">Carbone</span>
+          <span class="tier-word">Rareté</span>
+          <p class="tier-desc">Version accessible, numérotée. Très limitée à 100 exemplaires.</p>
+        </div>
+        <div class="tier tier--platine">
+          <span class="tier-name">Platine</span>
+          <span class="tier-word">Collection</span>
+          <p class="tier-desc">Numérotée et certifiée, rehaussée d'un élément en platine véritable. Limitée à 500 exemplaires.</p>
+        </div>
+        <div class="tier tier--or">
+          <span class="tier-name">Or</span>
+          <span class="tier-word">Exception</span>
+          <p class="tier-desc">Fabriquée sur commande, numérotée et certifiée, rehaussée d'un élément en or véritable.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ FABRICATION ============ -->
     <section class="section fabrication" id="fabrication">
       <div class="sky">
@@ -448,6 +473,7 @@
     <nav class="menu-nav">
       <a href="index.html">La boutique</a>
       <a href="index.html#collection">La collection</a>
+      <a href="index.html#histoire">L'histoire</a>
       <a href="couture.html">Haute Couture</a>
       <a href="index.html#fabrication">La fabrication</a>
       <a href="index.html#pourquoi">Le pourquoi ?</a>
@@ -455,7 +481,7 @@
     <p class="menu-foot">Le Carré</p>
   </aside>
 
-  <script src="cart.js?v=9"></script>
-  <script src="script.js?v=9"></script>
+  <script src="cart.js?v=10"></script>
+  <script src="script.js?v=10"></script>
 </body>
 </html>

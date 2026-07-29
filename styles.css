@@ -516,6 +516,52 @@ a { color: inherit; text-decoration: none; }
   color: #bdbdbd;
 }
 
+/* ============ L'HISTOIRE / 3 VERSIONS ============ */
+.histoire { padding-bottom: 30px; }
+.histoire-intro { max-width: 780px; margin: 0 auto; padding: 6px 28px 52px; text-align: center; }
+.histoire-intro p {
+  margin: 0;
+  font-size: clamp(1.15rem, 2.4vw, 1.55rem);
+  line-height: 1.6;
+  color: #9a9a9a;
+}
+.tiers {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 28px 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 34px;
+}
+.tier {
+  border-top: 2px solid var(--tier, #cfcfcf);
+  padding: 26px 8px 0;
+  text-align: center;
+}
+.tier--carbone { --tier: #3a3a3a; }
+.tier--platine { --tier: #b3bcc4; }
+.tier--or      { --tier: #c6a24e; }
+.tier-name {
+  display: block;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+.tier-word {
+  display: block;
+  font-style: italic;
+  font-size: 0.9rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #b0b0b0;
+  margin: 10px 0 18px;
+}
+.tier-desc { margin: 0; font-size: 1.02rem; line-height: 1.7; color: #9a9a9a; }
+@media (max-width: 720px) {
+  .tiers { grid-template-columns: 1fr; gap: 40px; padding: 0 24px 20px; }
+  .histoire-intro { padding-bottom: 40px; }
+}
+
 /* ============ FOOTER ============ */
 .site-footer {
   border-top: 1px solid var(--line);
