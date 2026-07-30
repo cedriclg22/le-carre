@@ -44,12 +44,15 @@
   SCULPTURES.forEach((s) => {
     const section = document.createElement("section");
     section.className = "sculpture-piece";
+    // [clone(dernier), carbone, platine, or, clone(premier)] -> la flèche droite
+    // avance TOUJOURS vers la droite, y compris au passage Or -> Carbone.
+    const seq = [ORDER[ORDER.length - 1]].concat(ORDER, [ORDER[0]]);
     section.innerHTML = `
       <h2 class="sculpture-piece-title">${s.name}</h2>
       <div class="sc-carousel">
         <button class="sc-arrow prev" aria-label="Version précédente">&lt;</button>
         <div class="sc-viewport"><div class="sc-track">
-          ${ORDER.map((g) => `<div class="sc-slide"><img src="${s.images[g]}" alt="${s.name} — version ${GAMME_LABEL[g]}" loading="lazy" /></div>`).join("")}
+          ${seq.map((g) => `<div class="sc-slide"><img src="${s.images[g]}" alt="${s.name} — version ${GAMME_LABEL[g]}" loading="lazy" /></div>`).join("")}
         </div></div>
         <button class="sc-arrow next" aria-label="Version suivante">&gt;</button>
       </div>
@@ -63,28 +66,50 @@
     const priceEl = section.querySelector(".sc-price");
     const addBtn = section.querySelector(".sc-add");
 
-    let i = 0; // index dans ORDER
+    const n = ORDER.length;
+    let phys = 1; // 1 = carbone (1re vraie vue)
     let animating = false;
 
-    function render() {
-      const g = ORDER[i];
-      track.style.transform = `translateX(-${i * 100}%)`;
+    function logicalIndex() { return (((phys - 1) % n) + n) % n; }
+
+    function updateInfo() {
+      const g = ORDER[logicalIndex()];
       captionEl.textContent = GAMME_LABEL[g];
       captionEl.className = "sc-caption " + g;
       priceEl.textContent = PRICES[g] + "€";
       addBtn.dataset.gamme = g;
     }
 
+    function place(p, animate) {
+      phys = p;
+      if (!animate) track.style.transition = "none";
+      track.style.transform = `translateX(-${phys * 100}%)`;
+      if (!animate) {
+        track.getBoundingClientRect(); // force le reflow
+        track.style.transition = "";
+      }
+      updateInfo();
+    }
+
+    // Le déverrouillage se fait par minuteur (et non via l'évènement
+    // "transitionend", qui ne se déclenche pas de façon fiable partout,
+    // notamment quand les animations sont réduites) : robuste dans tous les cas.
     function step(dir) {
       if (animating) return;
       animating = true;
-      i = (i + dir + ORDER.length) % ORDER.length;
-      render();
-      setTimeout(() => { animating = false; }, 500);
+      const target = phys + dir;
+      place(target, true);
+      setTimeout(() => {
+        if (target === n + 1) place(1, false);      // au-delà d'Or -> revient sur Carbone (même sens)
+        else if (target === 0) place(n, false);     // avant Carbone -> revient sur Or
+        animating = false;
+      }, 520);
     }
 
     section.querySelector(".sc-arrow.prev").addEventListener("click", () => step(-1));
     section.querySelector(".sc-arrow.next").addEventListener("click", () => step(1));
+
+    place(1, false);
 
     addBtn.addEventListener("click", () => {
       const g = addBtn.dataset.gamme;
@@ -105,8 +130,6 @@
         setTimeout(() => toast.classList.remove("is-visible"), 2600);
       }
     });
-
-    render();
   });
 
   /* précharge toutes les photos */

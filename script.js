@@ -147,6 +147,7 @@ document.querySelectorAll(".product").forEach((card) => {
         if (animating || n < 2 || i + 1 === phys) return;
         animating = true;
         place(i + 1, true);
+        setTimeout(() => { animating = false; }, 520);
       });
       dotsWrap.appendChild(dot);
     }
@@ -179,18 +180,19 @@ document.querySelectorAll(".product").forEach((card) => {
     place(n > 1 ? 1 : 0, false);
   }
 
+  // Le déverrouillage se fait par minuteur (et non via "transitionend", qui ne
+  // se déclenche pas de façon fiable partout, notamment animations réduites).
   function step(dir) {
     if (animating || n < 2) return;
     animating = true;
-    place(phys + dir, true);
+    const target = phys + dir;
+    place(target, true);
+    setTimeout(() => {
+      if (target === n + 1) place(1, false);      // au-delà de la fin -> 1re vue
+      else if (target === 0) place(n, false);     // avant le début -> dernière vue
+      animating = false;
+    }, 520);
   }
-
-  track.addEventListener("transitionend", (e) => {
-    if (e.propertyName !== "transform" || n < 2) return;
-    if (phys === n + 1) place(1, false);      // au-delà de la fin -> 1re vue
-    else if (phys === 0) place(n, false);     // avant le début -> dernière vue
-    animating = false;
-  });
 
   card.querySelector(".carousel-arrow.prev").addEventListener("click", () => step(-1));
   card.querySelector(".carousel-arrow.next").addEventListener("click", () => step(1));
