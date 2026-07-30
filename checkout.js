@@ -31,7 +31,7 @@
         </div>
         <div class="co-item-info">
           <p class="co-item-name">${it.productName}</p>
-          <p class="co-item-variant">${it.gamme ? it.gamme + " · " : ""}${it.color ? it.color + " · " : ""}${it.size}</p>
+          <p class="co-item-variant">${[it.gamme, it.color, it.size].filter(Boolean).join(" · ")}</p>
         </div>
         <p class="co-item-price">${it.price * it.qty}€</p>
       </div>`).join("");

@@ -63,7 +63,7 @@
         <img class="cl-img" src="${it.img}" alt="${it.productName}">
         <div class="cl-info">
           <p class="cl-name">${it.productName}</p>
-          <p class="cl-variant">${it.gamme ? it.gamme + " · " : ""}${it.color ? it.color + " · " : ""}${it.size}</p>
+          <p class="cl-variant">${[it.gamme, it.color, it.size].filter(Boolean).join(" · ")}</p>
           <div class="cl-qty">
             <button class="qty-btn qty-dec" aria-label="Diminuer">−</button>
             <span class="qty-val">${it.qty}</span>
