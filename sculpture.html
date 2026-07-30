@@ -6,7 +6,7 @@
   <title>Le Carré — La Sculpture</title>
   <meta name="description" content="La Sculpture Le Carré — pièces uniques en trois versions, Carbone, Platine, Or. L'Éclaté, Le Compacté, La Colonne." />
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=17" />
+  <link rel="stylesheet" href="styles.css?v=18" />
 </head>
 <body>
 
@@ -27,10 +27,41 @@
 
     <section class="sculpture-intro">
       <p class="sculpture-eyebrow">Le Carré</p>
-      <p class="sculpture-lead">Des pièces uniques, numérotées et certifiées.<br>Chaque sculpture existe en trois versions, pour l'intérieur comme l'extérieur.</p>
+      <h1 class="sculpture-title" id="sculptureTitle">La colonne</h1>
+      <p class="sculpture-lead">Des pièces uniques, numérotées et certifiées.<br>Pour l'intérieur comme l'extérieur, en trois versions.</p>
     </section>
 
-    <div id="sculptureList"></div>
+    <section class="sculpture-viewer">
+      <button class="sculpture-nav prev" id="scPrev" aria-label="Sculpture précédente">&lt;</button>
+
+      <div class="sculpture-gallery">
+        <div class="sc-piece" data-gamme="carbone" role="button" tabindex="0" aria-label="Choisir la version Carbone">
+          <figure>
+            <div class="sc-media"><img id="scImgCarbone" src="" alt="" loading="lazy" /></div>
+          </figure>
+          <span class="sc-caption carbone">Carbone</span>
+        </div>
+        <div class="sc-piece sc-center is-selected" data-gamme="platine" role="button" tabindex="0" aria-label="Choisir la version Platine">
+          <figure>
+            <div class="sc-media"><img id="scImgPlatine" src="" alt="" loading="lazy" /></div>
+          </figure>
+          <span class="sc-caption platine">Platine</span>
+        </div>
+        <div class="sc-piece" data-gamme="or" role="button" tabindex="0" aria-label="Choisir la version Or">
+          <figure>
+            <div class="sc-media"><img id="scImgOr" src="" alt="" loading="lazy" /></div>
+          </figure>
+          <span class="sc-caption or">Or</span>
+        </div>
+      </div>
+
+      <button class="sculpture-nav next" id="scNext" aria-label="Sculpture suivante">&gt;</button>
+    </section>
+
+    <div class="sculpture-purchase">
+      <p class="sculpture-price" id="scPrice">1490€</p>
+      <button class="sculpture-add" id="scAdd">Ajouter au panier</button>
+    </div>
 
     <section class="sculpture-cta">
       <p class="sculpture-cta-title">Une sculpture pour votre intérieur</p>
@@ -74,7 +105,7 @@
 
   <div class="cart-toast" id="cartToast" role="status" aria-live="polite"></div>
 
-  <script src="cart.js?v=17"></script>
-  <script src="sculpture.js?v=17"></script>
+  <script src="cart.js?v=18"></script>
+  <script src="sculpture.js?v=18"></script>
 </body>
 </html>

@@ -1,15 +1,14 @@
 /* ============================================================
    LE CARRÉ — page La Sculpture
-   Liste les 3 pièces, chacune en 3 gammes (Carbone / Platine / Or)
-   affichées côte à côte, avec prix et ajout au panier.
+   Une sculpture à la fois (flèches ‹ › pour changer de pièce) ;
+   3 photos Carbone/Platine/Or côte à côte ; on clique une photo
+   pour la sélectionner, prix + achat partagés pour la sélection.
    ============================================================ */
 (function () {
   const PRICES = { carbone: 890, platine: 1490, or: 2890 };
-  const GAMME_LABEL = { carbone: "Carbone", platine: "Platine", or: "Or" };
 
   const SCULPTURES = [
     {
-      key: "eclate",
       name: "L'Éclaté",
       images: {
         carbone: "images/sculpture-eclate-carbone.jpg",
@@ -18,7 +17,6 @@
       },
     },
     {
-      key: "compacte",
       name: "Le Compacté",
       images: {
         carbone: "images/sculpture-compacte-carbone.jpg",
@@ -27,7 +25,6 @@
       },
     },
     {
-      key: "colonne",
       name: "La colonne",
       images: {
         carbone: "images/sculpture-colonne-carbone.jpg",
@@ -37,59 +34,96 @@
     },
   ];
 
-  const list = document.getElementById("sculptureList");
+  let index = 2;          // démarre sur « La colonne »
+  let gamme = "platine";  // version sélectionnée par défaut
 
-  function pieceHTML(s, gamme, extraClass) {
-    return `
-      <div class="sc-piece ${extraClass}">
-        <figure>
-          <div class="sc-media"><img src="${s.images[gamme]}" alt="${s.name} — version ${GAMME_LABEL[gamme]}" loading="lazy" /></div>
-        </figure>
-        <span class="sc-caption ${gamme}">${GAMME_LABEL[gamme]}</span>
-        <p class="sc-price">${PRICES[gamme]}€</p>
-        <button class="sc-add" data-sculpture="${s.key}" data-gamme="${gamme}">Ajouter au panier</button>
-      </div>`;
+  const titleEl = document.getElementById("sculptureTitle");
+  const imgCarbone = document.getElementById("scImgCarbone");
+  const imgPlatine = document.getElementById("scImgPlatine");
+  const imgOr = document.getElementById("scImgOr");
+  const medias = document.querySelectorAll(".sc-media");
+  const pieces = document.querySelectorAll(".sc-piece");
+  const priceEl = document.getElementById("scPrice");
+  const addBtn = document.getElementById("scAdd");
+
+  function updatePurchase() {
+    priceEl.textContent = PRICES[gamme] + "€";
+    pieces.forEach((p) => p.classList.toggle("is-selected", p.dataset.gamme === gamme));
   }
 
-  SCULPTURES.forEach((s) => {
-    const section = document.createElement("section");
-    section.className = "sculpture-piece";
-    section.innerHTML = `
-      <h2 class="sculpture-piece-title">${s.name}</h2>
-      <div class="sculpture-gallery">
-        ${pieceHTML(s, "carbone", "")}
-        ${pieceHTML(s, "platine", "sc-center")}
-        ${pieceHTML(s, "or", "")}
-      </div>`;
-    list.appendChild(section);
-  });
+  function setImages() {
+    const s = SCULPTURES[index];
+    titleEl.textContent = s.name;
+    imgCarbone.src = s.images.carbone;
+    imgCarbone.alt = s.name + " — version Carbone";
+    imgPlatine.src = s.images.platine;
+    imgPlatine.alt = s.name + " — version Platine";
+    imgOr.src = s.images.or;
+    imgOr.alt = s.name + " — version Or";
+  }
 
-  list.querySelectorAll(".sc-add").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const sculptureKey = btn.dataset.sculpture;
-      const gamme = btn.dataset.gamme;
-      const s = SCULPTURES.find((x) => x.key === sculptureKey);
-      window.Cart.add({
-        id: "sculpture-" + sculptureKey + "-" + gamme,
-        product: "sculpture-" + sculptureKey,
-        productName: "La Sculpture · " + s.name,
-        gamme: GAMME_LABEL[gamme],
-        size: "",
-        price: PRICES[gamme],
-        img: s.images[gamme],
-      });
-      window.Cart.open();
-      const toast = document.getElementById("cartToast");
-      if (toast) {
-        toast.textContent = `${s.name} (${GAMME_LABEL[gamme]}) ajouté au panier`;
-        toast.classList.add("is-visible");
-        setTimeout(() => toast.classList.remove("is-visible"), 2600);
+  function render(animate) {
+    if (!animate) {
+      setImages();
+      updatePurchase();
+      return;
+    }
+    titleEl.classList.add("is-fading");
+    medias.forEach((m) => m.classList.add("is-fading"));
+    setTimeout(() => {
+      setImages();
+      updatePurchase();
+      titleEl.classList.remove("is-fading");
+      medias.forEach((m) => m.classList.remove("is-fading"));
+    }, 220);
+  }
+
+  function go(dir) {
+    index = (index + dir + SCULPTURES.length) % SCULPTURES.length;
+    render(true);
+  }
+
+  document.getElementById("scPrev").addEventListener("click", () => go(-1));
+  document.getElementById("scNext").addEventListener("click", () => go(1));
+
+  pieces.forEach((p) => {
+    p.addEventListener("click", () => {
+      gamme = p.dataset.gamme;
+      updatePurchase();
+    });
+    p.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        gamme = p.dataset.gamme;
+        updatePurchase();
       }
     });
+  });
+
+  addBtn.addEventListener("click", () => {
+    const s = SCULPTURES[index];
+    window.Cart.add({
+      id: "sculpture-" + index + "-" + gamme,
+      product: "sculpture",
+      productName: "La Sculpture · " + s.name,
+      gamme: gamme.charAt(0).toUpperCase() + gamme.slice(1),
+      size: "",
+      price: PRICES[gamme],
+      img: s.images[gamme],
+    });
+    window.Cart.open();
+    const toast = document.getElementById("cartToast");
+    if (toast) {
+      toast.textContent = `${s.name} (${gamme}) ajouté au panier`;
+      toast.classList.add("is-visible");
+      setTimeout(() => toast.classList.remove("is-visible"), 2600);
+    }
   });
 
   /* précharge toutes les photos */
   SCULPTURES.forEach((s) =>
     Object.values(s.images).forEach((src) => { const im = new Image(); im.src = src; })
   );
+
+  render(false);
 })();
