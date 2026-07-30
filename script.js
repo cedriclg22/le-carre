@@ -57,6 +57,20 @@ const IMAGES = {
 const GAMME_NAME = { carbone: "Carbone", platine: "Platine", or: "Or" };
 const COLOR_NAME = { blanc: "blanc", noir: "noir", clair: "clair" };
 
+/* ---- Phrase matière, sous les gammes (change avec la sélection) ---- */
+const MATERIAL_TEXT = {
+  vetement: {
+    carbone: "100% coton et véritable carbone 1K",
+    platine: "100% coton et véritable platine pur 99,99%",
+    or:      "100% coton et véritable or 18k",
+  },
+  chaussure: {
+    carbone: "Cuir synthétique + caoutchouc + véritable carbone 1K",
+    platine: "Cuir synthétique + caoutchouc + véritable platine pur 99,99%",
+    or:      "Cuir synthétique + caoutchouc + véritable or 18k",
+  },
+};
+
 /* Précharge toutes les photos -> bascule instantanée, pas de saut. */
 window.addEventListener("load", () => setTimeout(() => {
   Object.values(IMAGES).forEach((prod) =>
@@ -183,10 +197,14 @@ document.querySelectorAll(".product").forEach((card) => {
 
   function currentPrice() { return PRODUCTS[key].prices[state[key].gamme]; }
 
+  const materialNote = card.querySelector(".material-note");
+  const materialKind = key.startsWith("chaussure") ? "chaussure" : "vetement";
+
   function updateCTA() {
     const price = currentPrice();
     btn.dataset.price = price;
     btn.textContent = `Ajouter au panier — ${price}€`;
+    if (materialNote) materialNote.textContent = MATERIAL_TEXT[materialKind][state[key].gamme];
   }
 
   /* --- sélection de la gamme (Carbone / Platine / Or) --- */
