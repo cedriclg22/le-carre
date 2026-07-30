@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Le Carré — Haute Couture</title>
-  <meta name="description" content="Haute Couture Le Carré — des pièces uniques, façonnées à la main. Le carré poussé à l'extrême du geste couture. Sur rendez-vous." />
+  <title>Le Carré — La Sculpture</title>
+  <meta name="description" content="La Sculpture Le Carré — pièces uniques en trois versions, Carbone, Platine, Or. L'Éclaté, Le Compacté, La Colonne." />
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css?v=16" />
 </head>
@@ -23,51 +23,46 @@
     </button>
   </header>
 
-  <main class="couture">
+  <main class="sculpture">
 
-    <section class="couture-intro">
-      <p class="couture-eyebrow">Le Carré</p>
-      <h1 class="couture-title">Haute Couture</h1>
-      <p class="couture-lead">Des pièces uniques, façonnées à la main.<br>Le carré, poussé à l'extrême du geste couture.</p>
-      <p class="couture-appt">Sur rendez-vous</p>
+    <section class="sculpture-intro">
+      <p class="sculpture-eyebrow">Le Carré</p>
+      <h1 class="sculpture-title" id="sculptureTitle">La colonne</h1>
+      <p class="sculpture-lead">Des pièces uniques, numérotées et certifiées.<br>Chaque sculpture existe en trois versions.</p>
     </section>
 
-    <section class="couture-gallery">
+    <section class="sculpture-viewer">
+      <button class="sculpture-nav prev" id="scPrev" aria-label="Sculpture précédente">&lt;</button>
 
-      <figure class="couture-piece">
-        <div class="cp-media"><img src="images/couture-1.jpg" alt="Robe du soir noire, transparences et plissé" loading="lazy" /></div>
-        <figcaption class="cp-caption">
-          <span class="cp-index">01</span>
-          <h2 class="cp-name">La Robe du Soir</h2>
-          <p class="cp-desc">Fourreau de soie et voiles transparents, taillé au plus près. Le carré se devine, discret, au creux du buste.</p>
-        </figcaption>
-      </figure>
+      <div class="sculpture-gallery">
+        <div class="sc-piece">
+          <figure>
+            <div class="sc-media"><img id="scImgCarbone" src="" alt="" loading="lazy" /></div>
+          </figure>
+          <span class="sc-caption carbone">Carbone</span>
+        </div>
+        <div class="sc-piece sc-center">
+          <figure>
+            <div class="sc-media"><img id="scImgPlatine" src="" alt="" loading="lazy" /></div>
+          </figure>
+          <span class="sc-caption platine">Platine</span>
+        </div>
+        <div class="sc-piece">
+          <figure>
+            <div class="sc-media"><img id="scImgOr" src="" alt="" loading="lazy" /></div>
+          </figure>
+          <span class="sc-caption or">Or</span>
+        </div>
+      </div>
 
-      <figure class="couture-piece">
-        <div class="cp-media"><img src="images/couture-2.jpg" alt="Robe blanche à grands carrés noirs" loading="lazy" /></div>
-        <figcaption class="cp-caption">
-          <span class="cp-index">02</span>
-          <h2 class="cp-name">La Robe Carrée</h2>
-          <p class="cp-desc">Le motif fondateur, agrandi jusqu'à l'évidence. Carrés noirs sur coton ivoire, ceinturés de cuir.</p>
-        </figcaption>
-      </figure>
-
-      <figure class="couture-piece">
-        <div class="cp-media"><img src="images/couture-3.jpg" alt="Robe blanche architecturée en carrés de coton cousus main" loading="lazy" /></div>
-        <figcaption class="cp-caption">
-          <span class="cp-index">03</span>
-          <h2 class="cp-name">L'Édifice Blanc</h2>
-          <p class="cp-desc">Un empilement de carrés de coton, cousus main, pièce par pièce. La couture comme architecture.</p>
-        </figcaption>
-      </figure>
-
+      <button class="sculpture-nav next" id="scNext" aria-label="Sculpture suivante">&gt;</button>
     </section>
 
-    <section class="couture-cta">
-      <p class="couture-cta-title">Une pièce sur mesure</p>
-      <p class="couture-cta-text">Chaque création est unique et réalisée à la demande, dans notre atelier français.</p>
-      <a href="index.html#contact" class="couture-cta-btn">Prendre rendez-vous</a>
-      <a href="index.html" class="couture-back">← Retour à la boutique</a>
+    <section class="sculpture-cta">
+      <p class="sculpture-cta-title">Une sculpture pour votre intérieur</p>
+      <p class="sculpture-cta-text">Chaque pièce est unique, réalisée à la demande et livrée avec son certificat d'authenticité.</p>
+      <a href="index.html#contact" class="sculpture-cta-btn">Nous contacter</a>
+      <a href="index.html" class="sculpture-back">← Retour à la boutique</a>
     </section>
 
   </main>
@@ -106,5 +101,6 @@
   <div class="cart-toast" id="cartToast" role="status" aria-live="polite"></div>
 
   <script src="cart.js?v=16"></script>
+  <script src="sculpture.js?v=16"></script>
 </body>
 </html>
